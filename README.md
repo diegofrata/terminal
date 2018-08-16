@@ -1,6 +1,6 @@
-# Frata
+# terminal
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 6.1.3.
+This is a stupid terminal emulator I built for myself with Angular. I would not touch it if I were you.
 
 ## Development server
 

@@ -1,1 +1,53 @@
-/* You can add global styles to this file, and also import other style files */
+$colors:( 
+  background: black, 
+  text: #F4F4F4, 
+  bold-text: white, 
+  selection: #525252, 
+  black: black, 
+  red: #8D1A11, 
+  green: #47A526, 
+  yellow: #9B9729, 
+  blue: #011AAA, 
+  magenta: #A22EA5, 
+  cyan: #499EB2, 
+  white: #BFBFBF, 
+  bright-black: #656565, 
+  bright-red: #D2281C, 
+  bright-green: #60D53F, 
+  bright-yellow: #EBE74F, 
+  bright-blue: #0023DE, 
+  bright-magenta: #D235DE, 
+  bright-cyan: #6AE5E0, 
+  bright-white: #E4E4E4
+);
+@each $name, $value in $colors {
+  .color-#{$name} {
+    color: $value;
+  }
+  .bg-#{$name} {
+    background-color: $value;
+  }
+}
+
+html,
+body {
+  background-color: map-get($colors, background);
+  color: map-get($colors, text);
+  font-family: Monaco;
+  caret-color: transparent;
+}
+
+@keyframes blinker {
+  from {opacity: 1.0;}
+  to {opacity: 0.0;}
+}
+.block{
+	animation-name: blinker;
+	animation-duration: 0.6s;
+	animation-iteration-count: infinite;
+	animation-timing-function: cubic-bezier(1, 0, 0, 1);
+	animation-direction: alternate;
+}
+.input {
+  outline: transparent;
+}
