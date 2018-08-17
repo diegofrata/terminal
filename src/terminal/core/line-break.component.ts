@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'frata-br',
+  selector: 'terminal-br',
   template: '<br>'
 })
 export class LineBreakComponent {

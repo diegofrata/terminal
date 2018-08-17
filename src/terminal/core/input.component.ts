@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
 @Component({
-  selector: 'frata-input',
+  selector: 'terminal-input',
   template: '<span #input class="input" [attr.contenteditable]="editable"></span>'
 })
 export class InputComponent implements OnInit {

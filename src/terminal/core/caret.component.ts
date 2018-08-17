@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 @Component({
-  selector: 'frata-caret',
+  selector: 'terminal-caret',
   template: '<span class="block">█</span>'
 })
 export class CaretComponent {

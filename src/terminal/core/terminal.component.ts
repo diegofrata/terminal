@@ -6,8 +6,8 @@ import { Component, ComponentFactoryResolver, OnInit, AfterViewInit } from '@ang
 import { FrameComponent } from './frame.component';
 
 @Component({
-  selector: 'frata-terminal',
-  template: '<ng-template frata-frame-content></ng-template>'
+  selector: 'terminal-terminal',
+  template: '<ng-template terminal-frame-content></ng-template>'
 })
 export class TerminalComponent extends FrameComponent implements AfterViewInit {
 

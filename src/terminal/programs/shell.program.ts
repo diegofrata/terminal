@@ -1,23 +1,26 @@
 import { Injectable, Injector } from "@angular/core";
 import { Program, Alias, PROGRAMS } from "./program";
+import { LoginService } from "../core/login.service";
 
 @Injectable()
 @Alias('shell')
 export class ShellProgram extends Program {
-    host = 'frata';
-    user = 'login';
+    host = 'terminal';
     cwd = '/';
+    currentUser: { username: string, admin: boolean };
 
-    constructor(private injector: Injector) { 
+    constructor(private loginService: LoginService, private injector: Injector) { 
         super();
     }
 
     async main() {
+        const subscription = this.loginService.currentUser.subscribe(x => this.currentUser = x);
         while (await this.prompt());
+        subscription.unsubscribe();
     }
 
     async prompt() {
-        this.frame.write(`${this.host}:${this.cwd} ${this.user}$ `);
+        this.frame.write(`${this.host}:${this.cwd} ${this.currentUser.username}$ `);
         const line = await this.frame.readLine();
         this.frame.writeLine('');
 

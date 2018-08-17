@@ -5,8 +5,8 @@ import { InputComponent } from './input.component';
 import { FrameContentDirective } from './frame-content.directive';
 
 @Component({
-    selector: 'frata-frame',
-    template: '<ng-template frata-frame-content></ng-template>'
+    selector: 'terminal-frame',
+    template: '<ng-template terminal-frame-content></ng-template>'
 })
 export class FrameComponent implements AfterViewInit {
     protected index = 0;
@@ -32,8 +32,8 @@ export class FrameComponent implements AfterViewInit {
         this.append(TextComponent, ref => ref.instance.text = text);
     }
 
-    writeLine(text: string) {
-        this.write(text);
+    writeLine(text?: string) {
+        this.write(text ? text : '');
         this.append(LineBreakComponent);
     }
 

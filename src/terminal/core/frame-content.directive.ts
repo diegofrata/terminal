@@ -1,7 +1,7 @@
 import { ViewContainerRef, Directive } from "@angular/core";
 
 @Directive({
-    selector: '[frata-frame-content]',
+    selector: '[terminal-frame-content]',
 })
 export class FrameContentDirective {
     constructor(public viewContainerRef: ViewContainerRef) { }
