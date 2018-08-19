@@ -16,11 +16,11 @@ export function makeProgramProvider<T>(type: Type<T>) {
 export class Program {
     protected frame: FrameComponent;
 
-    async run(frame: FrameComponent) {
+    async run(frame: FrameComponent, args: string[]) {
         this.frame = frame;
-        await this.main();
+        await this.main(args);
     }
 
-    async main(): Promise<void> {
+    async main(args: string[]): Promise<void> {
     }
 }

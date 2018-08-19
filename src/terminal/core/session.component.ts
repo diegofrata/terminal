@@ -16,8 +16,8 @@ export class SessionComponent implements OnInit {
 
     async ngOnInit() {
         const login = this.injector.get(LoginProgram);
-        await login.run(await this.terminal.createFrame());
+        await login.run(await this.terminal.createFrame(), []);
         const shell = this.injector.get(ShellProgram);
-        await shell.run(await this.terminal.createFrame());
+        await shell.run(await this.terminal.createFrame(), []);
     }
 }

@@ -13,11 +13,18 @@ import { makeProgramProvider } from './programs/program';
 import { FrameContentDirective } from './core/frame-content.directive';
 import { LoginProgram } from './programs/login.program';
 import { LoginService } from './core/login.service';
+import { FileSystemService } from './core/file-system.service';
+import { MakeDirectoryProgram } from './programs/make-directory.program';
+import { ListDirectoryProgram } from './programs/list-directory.program';
+import { ChangeDirectoryProgram } from './programs/change-directory.program';
 
 const programs = [
   ...makeProgramProvider(LoginProgram),
   ...makeProgramProvider(ShellProgram),
   ...makeProgramProvider(HiProgram),
+  ...makeProgramProvider(MakeDirectoryProgram),
+  ...makeProgramProvider(ListDirectoryProgram),
+  ...makeProgramProvider(ChangeDirectoryProgram),
 ]
 
 const entryComponents = [
@@ -38,7 +45,7 @@ const entryComponents = [
   imports: [
     BrowserModule
   ],
-  providers: [...programs, LoginService],
+  providers: [...programs, LoginService, FileSystemService],
   bootstrap: [SessionComponent],
   entryComponents: entryComponents
 })

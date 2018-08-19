@@ -15,7 +15,7 @@ export class LoginProgram extends Program {
         const username = await this.frame.readLine();
         this.frame.writeLine();
         this.frame.write('password: ');
-        const password = await this.frame.readLine(); // TODO: mask
+        const password = await this.frame.readLine(true); // TODO: mask
         this.frame.writeLine();
 
         try {

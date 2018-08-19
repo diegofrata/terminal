@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+
 $colors:( 
   background: black, 
   text: #F4F4F4, 
@@ -33,21 +35,7 @@ html,
 body {
   background-color: map-get($colors, background);
   color: map-get($colors, text);
-  font-family: Monaco;
+  font-family: 'Roboto Mono', monospace;
+  font-size: 18px;
   caret-color: transparent;
-}
-
-@keyframes blinker {
-  from {opacity: 1.0;}
-  to {opacity: 0.0;}
-}
-.block{
-	animation-name: blinker;
-	animation-duration: 0.6s;
-	animation-iteration-count: infinite;
-	animation-timing-function: cubic-bezier(1, 0, 0, 1);
-	animation-direction: alternate;
-}
-.input {
-  outline: transparent;
 }

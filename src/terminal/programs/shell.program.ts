@@ -1,15 +1,15 @@
 import { Injectable, Injector } from "@angular/core";
 import { Program, Alias, PROGRAMS } from "./program";
 import { LoginService } from "../core/login.service";
+import { FileSystemService } from "../core/file-system.service";
 
 @Injectable()
 @Alias('shell')
 export class ShellProgram extends Program {
     host = 'terminal';
-    cwd = '/';
     currentUser: { username: string, admin: boolean };
 
-    constructor(private loginService: LoginService, private injector: Injector) { 
+    constructor(private loginService: LoginService, private fs: FileSystemService, private injector: Injector) { 
         super();
     }
 
@@ -20,7 +20,7 @@ export class ShellProgram extends Program {
     }
 
     async prompt() {
-        this.frame.write(`${this.host}:${this.cwd} ${this.currentUser.username}$ `);
+        this.frame.write(`${this.host}:${this.fs.currentDirectory.toPath()} ${this.currentUser.username}$ `);
         const line = await this.frame.readLine();
         this.frame.writeLine('');
 
@@ -35,7 +35,7 @@ export class ShellProgram extends Program {
 
         if (programName){
             const program: Program = this.injector.get(programName);
-            await program.run(await this.frame.createFrame());
+            await program.run(await this.frame.createFrame(), command.args);
         } else {
             this.frame.writeLine(`${command.name}: command not found`);
         }

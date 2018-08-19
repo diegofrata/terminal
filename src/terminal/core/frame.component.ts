@@ -37,9 +37,10 @@ export class FrameComponent implements AfterViewInit {
         this.append(LineBreakComponent);
     }
 
-    readLine(): Promise<string> {
+    readLine(secret?: boolean): Promise<string> {
         let promise;
         this.append(InputComponent, c => {
+            if (secret) c.instance.secret = true;
             promise = c.instance.line.asObservable().toPromise()
         });
         return promise;

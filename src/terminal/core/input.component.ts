@@ -2,12 +2,26 @@ import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Out
 import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'terminal-input',
-  template: '<span #input class="input" [attr.contenteditable]="editable"></span>'
+  template: `<span #input [ngClass]="{'input': true, 'input--secret': secret}" [attr.contenteditable]="editable"></span>`,
+  styles: [
+    ` 
+      .input {
+        outline: transparent;
+      }
+      .input--secret {
+        position: absolute;
+        left: -9999px;
+      }
+    `
+  ]
 })
 export class InputComponent implements OnInit {
+ 
   @ViewChild('input') private input;
-  editable = true;
   private handlers: (() => void)[];
+
+  editable = true;
+  secret = false;
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
