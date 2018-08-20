@@ -15,6 +15,7 @@ export class ListDirectoryProgram extends Program {
         for (const item of this.fs.currentDirectory.children)
             this.frame.write(item.name + '\t\t');
 
-        this.frame.writeLine();
+        if (this.fs.currentDirectory.children.length)
+            this.frame.writeLine();
     }
 }

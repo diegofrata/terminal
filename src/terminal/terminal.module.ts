@@ -17,6 +17,7 @@ import { FileSystemService } from './core/file-system.service';
 import { MakeDirectoryProgram } from './programs/make-directory.program';
 import { ListDirectoryProgram } from './programs/list-directory.program';
 import { ChangeDirectoryProgram } from './programs/change-directory.program';
+import { ClearProgram } from './programs/clear.program';
 
 const programs = [
   ...makeProgramProvider(LoginProgram),
@@ -25,6 +26,7 @@ const programs = [
   ...makeProgramProvider(MakeDirectoryProgram),
   ...makeProgramProvider(ListDirectoryProgram),
   ...makeProgramProvider(ChangeDirectoryProgram),
+  ...makeProgramProvider(ClearProgram),
 ]
 
 const entryComponents = [

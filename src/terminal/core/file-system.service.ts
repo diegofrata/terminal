@@ -41,16 +41,26 @@ export class FileSystemService {
         const paths = path.split('/');
 
         let dir = path[0] == '/' ? this.root : this.currentDirectory;
+
         for (const item of paths) {
-            const match = dir.children.find(x => x.name === item);
+            if (!item) {
+                continue;
+            }
+            else if (item == '..') {
+                dir = dir.parent ? dir.parent : dir;
+                continue;
+            }
+            else {
+                const match = dir.children.find(x => x.name === item);
 
-            if (match == null)
-                throw 'path not found.';
+                if (match == null)
+                    throw 'path not found';
 
-            if (match instanceof Directory === false)
-                throw `${path} is not a directory.`
+                if (match instanceof Directory === false)
+                    throw `${path} is not a directory`
 
-            dir = match as Directory;
+                dir = match as Directory;
+            }
         }
 
         this.currentDirectory = dir;

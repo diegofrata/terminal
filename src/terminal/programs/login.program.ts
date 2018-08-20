@@ -1,6 +1,7 @@
 import { Injectable, Injector } from "@angular/core";
 import { Program, Alias, PROGRAMS } from "./program";
 import { LoginService } from "../core/login.service";
+import { Color } from "../core/color";
 
 @Injectable()
 @Alias('login')
@@ -20,8 +21,9 @@ export class LoginProgram extends Program {
 
         try {
             this.loginService.login(username, password);
+            this.frame.clear();
         } catch (e) {
-            this.frame.writeLine(e);
+            this.frame.writeLine(e, Color.Red);
             await this.main();
         }
     }

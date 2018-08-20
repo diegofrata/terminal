@@ -3,6 +3,7 @@ import { TextComponent } from './text.component';
 import { Component, ComponentFactoryResolver, Type, ComponentRef, ViewChild, EventEmitter, AfterViewInit } from '@angular/core';
 import { InputComponent } from './input.component';
 import { FrameContentDirective } from './frame-content.directive';
+import { Color } from './color';
 
 @Component({
     selector: 'terminal-frame',
@@ -13,6 +14,7 @@ export class FrameComponent implements AfterViewInit {
     protected initialized = new EventEmitter();
 
     @ViewChild(FrameContentDirective) content: FrameContentDirective;
+    parent: FrameComponent;
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver) {
@@ -28,28 +30,39 @@ export class FrameComponent implements AfterViewInit {
         if (callback) callback(compRef);
     }
 
-    write(text: string) {
-        this.append(TextComponent, ref => ref.instance.text = text);
+    write(text: string, color?: Color) {
+        this.append(TextComponent, ref => {
+            ref.instance.text = text;
+            ref.instance.color = color;
+        });
     }
 
-    writeLine(text?: string) {
-        this.write(text ? text : '');
+    writeLine(text?: string, color?: Color) {
+        this.write(text ? text : '', color);
         this.append(LineBreakComponent);
     }
 
     readLine(secret?: boolean): Promise<string> {
         let promise;
-        this.append(InputComponent, c => {
-            if (secret) c.instance.secret = true;
-            promise = c.instance.line.asObservable().toPromise()
+        this.append(InputComponent, ref => {
+            if (secret) ref.instance.secret = true;
+            promise = ref.instance.line.asObservable().toPromise()
         });
         return promise;
     }
 
+    clear() {
+        this.content.viewContainerRef.clear();
+        this.index = 0;
+    }
+
     async createFrame(): Promise<FrameComponent> {
         await this.initialized.asObservable().toPromise();
-        let instance;
-        this.append(FrameComponent, c => instance = c.instance);
+        let instance: FrameComponent;
+        this.append(FrameComponent, c => {
+            c.instance.parent = this;
+            instance = c.instance;
+        });
         return instance;
     }
 

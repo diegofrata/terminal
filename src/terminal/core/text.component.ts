@@ -1,7 +1,10 @@
 import { Component } from '@angular/core';
+import { Color } from './color';
+import { kebabCase } from 'lodash';
+
 @Component({
   selector: 'terminal-text',
-  template: '<span>{{text}}</span>',
+  template: '<span [class]="getColor(color)">{{text}}</span>',
   styles: [
     `
     span { white-space: pre-wrap; }
@@ -10,4 +13,10 @@ import { Component } from '@angular/core';
 })
 export class TextComponent {
   text = "";
+  color: Color;
+
+  getColor(color: Color) {
+    const style = kebabCase(Color[color ? color : Color.Text]);
+    return `color-${style}`;
+  }
 }

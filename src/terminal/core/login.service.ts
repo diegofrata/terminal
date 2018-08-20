@@ -19,9 +19,9 @@ export class LoginService {
     login(username, password) {
         const account = this.users.find(x => x.username === username);
 
-        if (!account) throw 'invalid username.';
+        if (!account) throw 'invalid username';
 
-        if (account.password !== password) throw 'invalid password.';
+        if (account.password !== password) throw 'invalid password';
 
         this.currentUser.next(account);
     }
