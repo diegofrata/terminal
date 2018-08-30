@@ -36,6 +36,7 @@
     "@types/lodash": "^4.14.116",
     "@types/node": "~8.9.4",
     "codelyzer": "~4.2.1",
+    "compass-mixins": "^0.12.10",
     "jasmine-core": "~2.99.1",
     "jasmine-spec-reporter": "~4.2.1",
     "karma": "~1.7.1",

@@ -18,6 +18,8 @@ import { MakeDirectoryProgram } from './programs/make-directory.program';
 import { ListDirectoryProgram } from './programs/list-directory.program';
 import { ChangeDirectoryProgram } from './programs/change-directory.program';
 import { ClearProgram } from './programs/clear.program';
+import { BootProgram } from './programs/boot.program';
+import { GlitchComponent} from './core/glitch.component';
 
 const programs = [
   ...makeProgramProvider(LoginProgram),
@@ -27,6 +29,7 @@ const programs = [
   ...makeProgramProvider(ListDirectoryProgram),
   ...makeProgramProvider(ChangeDirectoryProgram),
   ...makeProgramProvider(ClearProgram),
+  ...makeProgramProvider(BootProgram),
 ]
 
 const entryComponents = [
@@ -34,7 +37,8 @@ const entryComponents = [
   TextComponent,
   LineBreakComponent,
   FrameComponent,
-  InputComponent
+  InputComponent,
+  GlitchComponent
 ];
 
 @NgModule({

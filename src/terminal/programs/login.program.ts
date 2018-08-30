@@ -2,6 +2,7 @@ import { Injectable, Injector } from "@angular/core";
 import { Program, Alias, PROGRAMS } from "./program";
 import { LoginService } from "../core/login.service";
 import { Color } from "../core/color";
+import { GlitchComponent } from "../core/glitch.component";
 
 @Injectable()
 @Alias('login')

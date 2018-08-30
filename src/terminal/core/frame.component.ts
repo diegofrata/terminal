@@ -28,6 +28,7 @@ export class FrameComponent implements AfterViewInit {
     append<T>(type: Type<T>, callback?: (c: ComponentRef<T>) => void) {
         const compRef = this.createComponent(type, this.index++);
         if (callback) callback(compRef);
+        compRef.location.nativeElement.scrollIntoView();
     }
 
     write(text: string, color?: Color) {

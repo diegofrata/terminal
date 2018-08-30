@@ -33,10 +33,10 @@ export class ShellProgram extends Program {
         
         const programName = PROGRAMS[command.name];
 
-        if (programName){
+        if (programName) {
             const program: Program = this.injector.get(programName);
             await program.run(await this.frame.createFrame(), command.args);
-        } else if (programName) {
+        } else if (command.name) {
             this.frame.writeLine(`${command.name}: command not found`);
         }
 

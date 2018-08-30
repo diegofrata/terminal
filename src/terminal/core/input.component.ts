@@ -2,7 +2,8 @@ import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Out
 import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'terminal-input',
-  template: `<span #input [ngClass]="{'input': true, 'input--secret': secret}" [attr.contenteditable]="editable"></span>`,
+  template: `<span #input [ngClass]="{'input': true, 'input--secret': secret}" [attr.contenteditable]="editable"></span>
+  <input #focusTarget class="input--secret">`,
   styles: [
     ` 
       .input {
@@ -18,6 +19,7 @@ import { EventEmitter } from '@angular/core';
 export class InputComponent implements OnInit {
  
   @ViewChild('input') private input;
+  @ViewChild('focusTarget') private focusTarget;
   private handlers: (() => void)[];
 
   editable = true;
@@ -25,7 +27,7 @@ export class InputComponent implements OnInit {
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
-  constructor(private renderer: Renderer2) {
+  constructor(private renderer: Renderer2, private elRef: ElementRef) {
   }
 
   ngOnInit() {
@@ -39,6 +41,7 @@ export class InputComponent implements OnInit {
 
   private focus() {
     setTimeout(() => {
+      this.focusTarget.nativeElement.focus();
       this.input.nativeElement.focus()
 
       const range = document.createRange();
@@ -63,6 +66,9 @@ export class InputComponent implements OnInit {
       }
 
       this.handlers = null;
+
+      this.renderer.removeChild(this.elRef.nativeElement, this.focusTarget.nativeElement);
+      this.focusTarget = null;
 
       this.line.emit(this.input.nativeElement.innerText);
       this.line.complete();

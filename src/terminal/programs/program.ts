@@ -1,11 +1,13 @@
 import { FrameComponent } from "../core/frame.component";
 import { Type } from "@angular/core";
 
-export const PROGRAMS: { [alias: string]: string } = {};
+export let PROGRAMS: { [alias: string]: string } = {};
 
 export function Alias<T>(alias: string): any {
     return function (target) {
         PROGRAMS[alias] = target.name;
+
+        console.log(target)
     }
 }
 
