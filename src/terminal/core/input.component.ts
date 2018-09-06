@@ -2,28 +2,32 @@ import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Out
 import { EventEmitter } from '@angular/core';
 @Component({
   selector: 'terminal-input',
-  template: `<span #input [ngClass]="{'input': true, 'input--secret': secret}" [attr.contenteditable]="editable"></span>
-  <input #focusTarget class="input--secret">`,
+  template: `
+    <input #focusTarget class="input" [(ngModel)]="text" autofocus>
+    <span [ngClass]="{'input--secret': secret}">{{printableText}}</span>
+    `,
   styles: [
-    ` 
-      .input {
-        outline: transparent;
+    ` .input {
+        position: absolute;
+        top: -9999px;
+        left: -9999px;
       }
       .input--secret {
-        position: absolute;
-        left: -9999px;
+        font-size: 2em;
+        line-height: 0;
+        vertical-align: middle;
+        letter-spacing: -0.15em;
       }
     `
   ]
 })
 export class InputComponent implements OnInit {
- 
-  @ViewChild('input') private input;
   @ViewChild('focusTarget') private focusTarget;
   private handlers: (() => void)[];
 
   editable = true;
   secret = false;
+  text = '';
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
@@ -34,33 +38,33 @@ export class InputComponent implements OnInit {
     this.focus();
 
     this.handlers = [
-      this.renderer.listen(this.input.nativeElement, 'blur', () => this.focus()),
-      this.renderer.listen(this.input.nativeElement, 'keydown', e => this.checkEnter(e))
+      this.renderer.listen(document, 'touchstart', (e) => this.focus(e)),
+      this.renderer.listen(document, 'touchend', (e) => { e.preventDefault(); e.stopPropagation(); }),
+      this.renderer.listen(document, 'click', (e) => this.focus(e)),
+      this.renderer.listen(this.focusTarget.nativeElement, 'keydown', e => this.checkEnter(e))
     ];
   }
 
-  private focus() {
+  get printableText() {
+    if (!this.secret) return this.text;
+    return ''.padStart(this.text.length, '•');
+
+  }
+
+  private focus(e?) {
     setTimeout(() => {
       this.focusTarget.nativeElement.focus();
-      this.input.nativeElement.focus()
-
-      const range = document.createRange();
-      range.selectNodeContents(this.input.nativeElement);
-      range.collapse(false);
-
-      const sel = window.getSelection();
-      sel.removeAllRanges();
-      sel.addRange(range);
-
+      if (e)
+        e.preventDefault();
     }, 0);
   }
 
   private checkEnter(e) {
     if (e.key === 'Enter') {
       e.preventDefault();
-      
+
       this.editable = false;
-      
+
       for (const destroyable of this.handlers) {
         destroyable();
       }
@@ -70,7 +74,7 @@ export class InputComponent implements OnInit {
       this.renderer.removeChild(this.elRef.nativeElement, this.focusTarget.nativeElement);
       this.focusTarget = null;
 
-      this.line.emit(this.input.nativeElement.innerText);
+      this.line.emit(this.text);
       this.line.complete();
     }
   }

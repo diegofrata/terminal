@@ -206,7 +206,10 @@ export class BootProgram extends Program {
     }
 
     async main(args: string[]) {
+        await this.simulateBoot();
+    }
 
+    async simulateBoot() {
         this.frame.append(GlitchComponent, c => c.instance.text = 'frataOS');
         await this.sleeper(5000);
         this.frame.clear();
@@ -219,7 +222,6 @@ export class BootProgram extends Program {
         }
 
         this.frame.clear();
-
     }
 
     sleeper(ms) {

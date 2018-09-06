@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { TerminalComponent } from './core/terminal.component';
 import { LineBreakComponent } from "./core/line-break.component";
@@ -49,7 +50,8 @@ const entryComponents = [
     ...entryComponents
   ],
   imports: [
-    BrowserModule
+    BrowserModule,
+    FormsModule
   ],
   providers: [...programs, LoginService, FileSystemService],
   bootstrap: [SessionComponent],

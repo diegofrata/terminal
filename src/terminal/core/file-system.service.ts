@@ -30,7 +30,7 @@ export class FileSystemService {
     root = new Directory(null, '');
     currentDirectory = this.root;
 
-    createDirectory(name: string, parent?: Directory) {
+     createDirectory(name: string, parent?: Directory) {
         const currentDirectory = parent ? parent : this.currentDirectory;
         const dir = new Directory(currentDirectory, name);
         currentDirectory.children.push(dir);
@@ -48,6 +48,9 @@ export class FileSystemService {
             }
             else if (item == '..') {
                 dir = dir.parent ? dir.parent : dir;
+                continue;
+            }
+            else if (item == '.') {
                 continue;
             }
             else {
