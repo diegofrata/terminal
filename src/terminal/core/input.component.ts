@@ -1,16 +1,16 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
+import { DelayScroll } from './delay-scroll';
 @Component({
   selector: 'terminal-input',
   template: `
-    <input #focusTarget class="input" [(ngModel)]="text" autofocus>
+    <input #focusTarget class="input" [(ngModel)]="text" autocorrect="off" autocapitalize="none">
     <span [ngClass]="{'input--secret': secret}">{{printableText}}</span>
     `,
   styles: [
     ` .input {
         position: absolute;
-        top: -9999px;
-        left: -9999px;
+        left: -9999px;       
       }
       .input--secret {
         font-size: 2em;
@@ -21,13 +21,14 @@ import { EventEmitter } from '@angular/core';
     `
   ]
 })
-export class InputComponent implements OnInit {
+export class InputComponent implements OnInit, DelayScroll {
   @ViewChild('focusTarget') private focusTarget;
   private handlers: (() => void)[];
 
   editable = true;
   secret = false;
   text = '';
+  delayScroll = true;
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
@@ -38,8 +39,7 @@ export class InputComponent implements OnInit {
     this.focus();
 
     this.handlers = [
-      this.renderer.listen(document, 'touchstart', (e) => this.focus(e)),
-      this.renderer.listen(document, 'touchend', (e) => { e.preventDefault(); e.stopPropagation(); }),
+      this.renderer.listen(document, 'touchend', (e) => { this.focus(e); }),
       this.renderer.listen(document, 'click', (e) => this.focus(e)),
       this.renderer.listen(this.focusTarget.nativeElement, 'keydown', e => this.checkEnter(e))
     ];
@@ -52,11 +52,9 @@ export class InputComponent implements OnInit {
   }
 
   private focus(e?) {
-    setTimeout(() => {
+    if (this.focusTarget.nativeElement) {
       this.focusTarget.nativeElement.focus();
-      if (e)
-        e.preventDefault();
-    }, 0);
+    }
   }
 
   private checkEnter(e) {

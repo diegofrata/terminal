@@ -4,6 +4,7 @@ import { Component, ComponentFactoryResolver, Type, ComponentRef, ViewChild, Eve
 import { InputComponent } from './input.component';
 import { FrameContentDirective } from './frame-content.directive';
 import { Color } from './color';
+import { DelayScroll, isDelayScroll } from './delay-scroll';
 
 @Component({
     selector: 'terminal-frame',
@@ -28,7 +29,12 @@ export class FrameComponent implements AfterViewInit {
     append<T>(type: Type<T>, callback?: (c: ComponentRef<T>) => void) {
         const compRef = this.createComponent(type, this.index++);
         if (callback) callback(compRef);
-        compRef.location.nativeElement.scrollIntoView();
+
+        if (isDelayScroll(compRef.instance) && compRef.instance.delayScroll) {
+            setTimeout(() => compRef.location.nativeElement.scrollIntoViewIfNeeded(), 0);
+        } else {
+            compRef.location.nativeElement.scrollIntoViewIfNeeded();
+        }
     }
 
     write(text: string, color?: Color) {

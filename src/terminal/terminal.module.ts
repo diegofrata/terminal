@@ -21,16 +21,18 @@ import { ChangeDirectoryProgram } from './programs/change-directory.program';
 import { ClearProgram } from './programs/clear.program';
 import { BootProgram } from './programs/boot.program';
 import { GlitchComponent} from './core/glitch.component';
+import { CountProgram } from './programs/count.program';
 
 const programs = [
-  ...makeProgramProvider(LoginProgram),
-  ...makeProgramProvider(ShellProgram),
-  ...makeProgramProvider(HiProgram),
-  ...makeProgramProvider(MakeDirectoryProgram),
-  ...makeProgramProvider(ListDirectoryProgram),
+  ...makeProgramProvider(BootProgram),
   ...makeProgramProvider(ChangeDirectoryProgram),
   ...makeProgramProvider(ClearProgram),
-  ...makeProgramProvider(BootProgram),
+  ...makeProgramProvider(CountProgram),
+  ...makeProgramProvider(HiProgram),
+  ...makeProgramProvider(ListDirectoryProgram),
+  ...makeProgramProvider(LoginProgram),
+  ...makeProgramProvider(MakeDirectoryProgram),
+  ...makeProgramProvider(ShellProgram),
 ]
 
 const entryComponents = [
