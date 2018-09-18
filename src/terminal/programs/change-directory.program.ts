@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
-import { Program, Alias } from "./program";
+import { ProgramBase, Program } from "./program";
 import { FileSystemService } from "../core/file-system.service";
 
 @Injectable()
-@Alias('cd')
-export class ChangeDirectoryProgram extends Program {
+@Program({
+    alias: 'cd',
+    description: 'Changes to a different directory.'
+})
+export class ChangeDirectoryProgram extends ProgramBase {
 
     constructor(private fs: FileSystemService) {
         super();

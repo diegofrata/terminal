@@ -1,10 +1,13 @@
 import { Injectable } from "@angular/core";
-import { Program, Alias } from "./program";
+import { ProgramBase, Program } from "./program";
 import { FileSystemService } from "../core/file-system.service";
 
 @Injectable()
-@Alias('ls')
-export class ListDirectoryProgram extends Program {
+@Program({
+    alias: 'ls',
+    description: 'List all directories and files in a directory.'
+})
+export class ListDirectoryProgram extends ProgramBase {
 
     constructor(private fs: FileSystemService) {
         super();

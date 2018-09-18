@@ -1,9 +1,12 @@
 import { Injectable, Injector } from "@angular/core";
-import { Program, Alias, PROGRAMS } from "./program";
+import { ProgramBase, Program, PROGRAMS } from "./program";
 
 @Injectable()
-@Alias('count')
-export class CountProgram extends Program {
+@Program({
+    alias: 'count',
+    description: 'Counts to 50.'
+})
+export class CountProgram extends ProgramBase {
 
     async main() {
         let i = 0;

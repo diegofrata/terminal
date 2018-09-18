@@ -19,9 +19,8 @@ export class LoginService {
     login(username, password) {
         const account = this.users.find(x => x.username === username);
 
-        if (!account) throw 'invalid username';
-
-        if (account.password !== password) throw 'invalid password';
+        if (!account || account.password !== password) 
+            throw 'invalid credentials. perhaps you should try login \'root\' and password \'123\'...';
 
         this.currentUser.next(account);
     }

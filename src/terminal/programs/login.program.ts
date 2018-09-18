@@ -1,12 +1,14 @@
-import { Injectable, Injector } from "@angular/core";
-import { Program, Alias, PROGRAMS } from "./program";
+import { Injectable } from "@angular/core";
+import { ProgramBase, Program } from "./program";
 import { LoginService } from "../core/login.service";
 import { Color } from "../core/color";
-import { GlitchComponent } from "../core/glitch.component";
 
 @Injectable()
-@Alias('login')
-export class LoginProgram extends Program {
+@Program({
+    alias: 'login',
+    description: 'Allow a user to login with a username and password.'
+})
+export class LoginProgram extends ProgramBase {
 
     constructor(private loginService: LoginService) {
         super();
@@ -23,6 +25,7 @@ export class LoginProgram extends Program {
         try {
             this.loginService.login(username, password);
             this.frame.clear();
+            this.frame.writeLine('Welcome back. Type \'help\' to see a list of supported commands.');
         } catch (e) {
             this.frame.writeLine(e, Color.Red);
             await this.main();

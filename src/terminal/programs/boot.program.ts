@@ -1,10 +1,10 @@
 import { Injectable } from "@angular/core";
-import { Program } from "./program";
+import { ProgramBase } from "./program";
 import { FileSystemService } from "../core/file-system.service";
 import { GlitchComponent } from "../core/glitch.component";
 
 @Injectable()
-export class BootProgram extends Program {
+export class BootProgram extends ProgramBase {
     log = [
         `Uncompressing Linux... done, booting the kernel.`,
         `Booting Linux on physical CPU 0x0`,

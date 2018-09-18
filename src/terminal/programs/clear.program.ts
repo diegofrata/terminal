@@ -1,9 +1,12 @@
 import { Injectable, Injector } from "@angular/core";
-import { Program, Alias, PROGRAMS } from "./program";
+import { ProgramBase, Program, PROGRAMS } from "./program";
 
 @Injectable()
-@Alias('clear')
-export class ClearProgram extends Program {
+@Program({
+    alias: 'clear', 
+    description: 'Clears all output from the screen.'
+})
+export class ClearProgram extends ProgramBase {
     async main() {
         if (this.frame.parent)
             this.frame.parent.clear();

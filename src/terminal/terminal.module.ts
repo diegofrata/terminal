@@ -22,6 +22,7 @@ import { ClearProgram } from './programs/clear.program';
 import { BootProgram } from './programs/boot.program';
 import { GlitchComponent} from './core/glitch.component';
 import { CountProgram } from './programs/count.program';
+import { HelpProgram } from './programs/help.program';
 
 const programs = [
   ...makeProgramProvider(BootProgram),
@@ -33,6 +34,7 @@ const programs = [
   ...makeProgramProvider(LoginProgram),
   ...makeProgramProvider(MakeDirectoryProgram),
   ...makeProgramProvider(ShellProgram),
+  ...makeProgramProvider(HelpProgram),
 ]
 
 const entryComponents = [

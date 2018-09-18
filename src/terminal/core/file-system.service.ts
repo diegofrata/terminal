@@ -31,6 +31,9 @@ export class FileSystemService {
     currentDirectory = this.root;
 
      createDirectory(name: string, parent?: Directory) {
+        if (name == null)
+            throw 'invalid directory name';
+            
         const currentDirectory = parent ? parent : this.currentDirectory;
         const dir = new Directory(currentDirectory, name);
         currentDirectory.children.push(dir);

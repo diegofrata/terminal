@@ -1,15 +1,18 @@
 import { Injectable, Injector } from "@angular/core";
-import { Program, Alias, PROGRAMS } from "./program";
+import { ProgramBase, Program, PROGRAMS } from "./program";
 import { LoginService } from "../core/login.service";
 import { FileSystemService } from "../core/file-system.service";
 
 @Injectable()
-@Alias('shell')
-export class ShellProgram extends Program {
+@Program({
+    alias: 'shell',
+    description: 'Starts a new shell that can take commands.'
+})
+export class ShellProgram extends ProgramBase {
     host = 'terminal';
     currentUser: { username: string, admin: boolean };
 
-    constructor(private loginService: LoginService, private fs: FileSystemService, private injector: Injector) { 
+    constructor(private loginService: LoginService, private fs: FileSystemService, private injector: Injector) {
         super();
     }
 
@@ -29,12 +32,12 @@ export class ShellProgram extends Program {
         if (command.name === 'exit') {
             this.frame.writeLine('Bye.');
             return false;
-        } 
-        
-        const programName = PROGRAMS[command.name];
+        }
 
-        if (programName) {
-            const program: Program = this.injector.get(programName);
+        const programDefinition = PROGRAMS[command.name];
+
+        if (programDefinition) {
+            const program: ProgramBase = this.injector.get(programDefinition.target);
             await program.run(await this.frame.createFrame(), command.args);
         } else if (command.name) {
             this.frame.writeLine(`${command.name}: command not found`);
