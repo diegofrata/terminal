@@ -1,7 +1,4 @@
-
-
 import { CaretComponent } from './caret.component';
-
 import { Component, ComponentFactoryResolver, OnInit, AfterViewInit } from '@angular/core';
 import { FrameComponent } from './frame.component';
 

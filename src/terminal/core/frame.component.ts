@@ -6,6 +6,8 @@ import { FrameContentDirective } from './frame-content.directive';
 import { Color } from './color';
 import { DelayScroll, isDelayScroll } from './delay-scroll';
 
+import * as $ from 'jquery';
+
 @Component({
     selector: 'terminal-frame',
     template: '<ng-template terminal-frame-content></ng-template>'
@@ -29,12 +31,7 @@ export class FrameComponent implements AfterViewInit {
     append<T>(type: Type<T>, callback?: (c: ComponentRef<T>) => void) {
         const compRef = this.createComponent(type, this.index++);
         if (callback) callback(compRef);
-
-        if (isDelayScroll(compRef.instance) && compRef.instance.delayScroll) {
-            setTimeout(() => compRef.location.nativeElement.scrollIntoViewIfNeeded(), 0);
-        } else {
-            compRef.location.nativeElement.scrollIntoViewIfNeeded();
-        }
+        $('html, body').scrollTop($(document).height()-$(window).height());
     }
 
     write(text: string, color?: Color) {
