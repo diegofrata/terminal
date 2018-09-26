@@ -4,9 +4,12 @@ import { Component, ComponentFactoryResolver, Type, ComponentRef, ViewChild, Eve
 import { InputComponent } from './input.component';
 import { FrameContentDirective } from './frame-content.directive';
 import { Color } from './color';
-import { DelayScroll, isDelayScroll } from './delay-scroll';
 
 import * as $ from 'jquery';
+
+function forceScroll() {
+    $('html, body').scrollTop($(document).height() - $(window).height());
+}
 
 @Component({
     selector: 'terminal-frame',
@@ -15,6 +18,7 @@ import * as $ from 'jquery';
 export class FrameComponent implements AfterViewInit {
     protected index = 0;
     protected initialized = new EventEmitter();
+    protected forceScrolling = false;
 
     @ViewChild(FrameContentDirective) content: FrameContentDirective;
     parent: FrameComponent;
@@ -28,10 +32,14 @@ export class FrameComponent implements AfterViewInit {
         this.initialized.complete();
     }
 
+    enableForceScrolling() {
+        this.forceScrolling = true;
+    }
+
     append<T>(type: Type<T>, callback?: (c: ComponentRef<T>) => void) {
         const compRef = this.createComponent(type, this.index++);
         if (callback) callback(compRef);
-        $('html, body').scrollTop($(document).height()-$(window).height());
+        if (this.forceScrolling) forceScroll();
     }
 
     write(text: string, color?: Color) {

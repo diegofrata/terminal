@@ -13,7 +13,7 @@ export class HelpProgram extends ProgramBase {
         this.frame.writeLine('These are the supported commands: ');
         this.frame.writeLine();
 
-        const keys = Object.keys(PROGRAMS);
+        const keys = Object.keys(PROGRAMS).sort();
         const maxLength = max(keys.map(x => x.length));
 
         keys.forEach(element => {

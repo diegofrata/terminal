@@ -206,17 +206,18 @@ export class BootProgram extends ProgramBase {
     }
 
     async main(args: string[]) {
+        this.frame.enableForceScrolling();
         await this.simulateBoot();
     }
 
     async simulateBoot() {
         this.frame.append(GlitchComponent, c => c.instance.text = 'frataOS');
-        await this.sleeper(5000);
+        await this.sleeper(1000);
         this.frame.clear();
 
         for (const line of this.log) {
             this.frame.write(line);
-            const ms = Math.pow(Math.random(), 2) * 100;
+            const ms = Math.pow(Math.random(), 2) * 25;
             await this.sleeper(ms);
             this.frame.writeLine();
         }

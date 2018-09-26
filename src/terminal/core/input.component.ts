@@ -1,6 +1,8 @@
 import { Component, OnInit, ElementRef, AfterViewInit, ViewChild, Renderer2, Output } from '@angular/core';
 import { EventEmitter } from '@angular/core';
-import { DelayScroll } from './delay-scroll';
+
+import * as $ from 'jquery';
+
 @Component({
   selector: 'terminal-input',
   template: `
@@ -21,14 +23,13 @@ import { DelayScroll } from './delay-scroll';
     `
   ]
 })
-export class InputComponent implements OnInit, DelayScroll {
+export class InputComponent implements OnInit {
   @ViewChild('focusTarget') private focusTarget;
   private handlers: (() => void)[];
 
   editable = true;
   secret = false;
   text = '';
-  delayScroll = true;
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
