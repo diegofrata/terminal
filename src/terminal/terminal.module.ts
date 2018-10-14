@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { TerminalComponent } from './core/terminal.component';
 import { LineBreakComponent } from "./core/line-break.component";
@@ -20,9 +21,10 @@ import { ListDirectoryProgram } from './programs/list-directory.program';
 import { ChangeDirectoryProgram } from './programs/change-directory.program';
 import { ClearProgram } from './programs/clear.program';
 import { BootProgram } from './programs/boot.program';
-import { GlitchComponent} from './core/glitch.component';
+import { GlitchComponent } from './core/glitch.component';
 import { CountProgram } from './programs/count.program';
 import { HelpProgram } from './programs/help.program';
+import { TicTacToeProgram } from './programs/tic-tac-toe/tic-tac-toe.program';
 
 const programs = [
   ...makeProgramProvider(BootProgram),
@@ -35,6 +37,7 @@ const programs = [
   ...makeProgramProvider(MakeDirectoryProgram),
   ...makeProgramProvider(ShellProgram),
   ...makeProgramProvider(HelpProgram),
+  ...makeProgramProvider(TicTacToeProgram),
 ]
 
 const entryComponents = [
@@ -55,12 +58,16 @@ const entryComponents = [
   ],
   imports: [
     BrowserModule,
-    FormsModule
+    FormsModule,
+    RouterModule.forRoot([
+      { path: 'run/:user/:pwd/:program', component: TerminalComponent, pathMatch: 'full' },
+      { path: '**', component: TerminalComponent, pathMatch: 'full' },
+    ])
   ],
   providers: [...programs, LoginService, FileSystemService],
   bootstrap: [SessionComponent],
   entryComponents: entryComponents
 })
-export class TerminalModule { 
+export class TerminalModule {
 
 }

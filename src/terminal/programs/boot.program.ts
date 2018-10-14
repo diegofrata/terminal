@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { ProgramBase } from "./program";
 import { FileSystemService } from "../core/file-system.service";
 import { GlitchComponent } from "../core/glitch.component";
+import { sleeper } from '../core/util';
 
 @Injectable()
 export class BootProgram extends ProgramBase {
@@ -212,20 +213,16 @@ export class BootProgram extends ProgramBase {
 
     async simulateBoot() {
         this.frame.append(GlitchComponent, c => c.instance.text = 'frataOS');
-        await this.sleeper(1000);
+        await sleeper(1000);
         this.frame.clear();
 
         for (const line of this.log) {
             this.frame.write(line);
             const ms = Math.pow(Math.random(), 2) * 25;
-            await this.sleeper(ms);
+            await sleeper(ms);
             this.frame.writeLine();
         }
 
         this.frame.clear();
-    }
-
-    sleeper(ms) {
-        return new Promise(resolve => setTimeout(() => resolve(0), ms));
     }
 }

@@ -14,13 +14,19 @@ export class LoginProgram extends ProgramBase {
         super();
     }
 
-    async main() {
-        this.frame.write('login: ');
-        const username = await this.frame.readLine();
-        this.frame.writeLine();
-        this.frame.write('password: ');
-        const password = await this.frame.readLine(true); // TODO: mask
-        this.frame.writeLine();
+    async main(args: string[]) {
+        let username, password;
+        if (args && args.length >= 2) {
+            username = args[0];
+            password = args[1];
+        } else {
+            this.frame.write('login: ');
+            username = await this.frame.readLine();
+            this.frame.writeLine();
+            this.frame.write('password: ');
+            password = await this.frame.readLine(true); // TODO: mask
+            this.frame.writeLine();
+        }
 
         try {
             this.loginService.login(username, password);
@@ -28,7 +34,7 @@ export class LoginProgram extends ProgramBase {
             this.frame.writeLine('Welcome back. Type \'help\' to see a list of supported commands.');
         } catch (e) {
             this.frame.writeLine(e, Color.Red);
-            await this.main();
+            await this.main([]);
         }
     }
 }

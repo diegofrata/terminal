@@ -63,6 +63,15 @@ export class FrameComponent implements AfterViewInit {
         return promise;
     }
 
+    readKey(): Promise<string> {
+        let promise;
+        this.append(InputComponent, ref => {
+            ref.instance.mode = 'key';
+            promise = ref.instance.line.asObservable().toPromise()
+        });
+        return promise;
+    }
+
     clear() {
         this.content.viewContainerRef.clear();
         this.index = 0;

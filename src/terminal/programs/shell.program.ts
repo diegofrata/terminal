@@ -16,17 +16,36 @@ export class ShellProgram extends ProgramBase {
         super();
     }
 
-    async main() {
+    async main(args: string[]) {
         const subscription = this.loginService.currentUser.subscribe(x => this.currentUser = x);
+
+        if (args && args.length) {
+            this.printDir();
+            this.frame.write(args[0])
+            this.frame.writeLine();
+            await this.tryRun(args[0]);
+        }
+
         while (await this.prompt());
         subscription.unsubscribe();
     }
 
     async prompt() {
-        this.frame.write(`${this.host}:${this.fs.currentDirectory.toPath()} ${this.currentUser.username}$ `);
+        this.printDir();
         const line = await this.frame.readLine();
         this.frame.writeLine('');
 
+        await this.tryRun(line);
+
+        
+        return true;
+    }
+
+    printDir() {
+        this.frame.write(`${this.host}:${this.fs.currentDirectory.toPath()} ${this.currentUser.username}$ `);
+    }
+
+    async tryRun(line) {
         const command = this.parse(line);
 
         if (command.name === 'exit') {
@@ -43,7 +62,6 @@ export class ShellProgram extends ProgramBase {
             this.frame.writeLine(`${command.name}: command not found`);
         }
 
-        return true;
     }
 
     parse(line: string) {

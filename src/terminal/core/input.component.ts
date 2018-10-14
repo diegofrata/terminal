@@ -30,6 +30,7 @@ export class InputComponent implements OnInit {
   editable = true;
   secret = false;
   text = '';
+  mode: 'text' | 'key' = 'text';
 
   @Output() line: EventEmitter<string> = new EventEmitter<string>();
 
@@ -42,7 +43,7 @@ export class InputComponent implements OnInit {
     this.handlers = [
       this.renderer.listen(document, 'touchend', (e) => { this.focus(e); }),
       this.renderer.listen(document, 'click', (e) => this.focus(e)),
-      this.renderer.listen(this.focusTarget.nativeElement, 'keydown', e => this.checkEnter(e))
+      this.renderer.listen(this.focusTarget.nativeElement, 'keydown', e => this.checkInput(e))
     ];
   }
 
@@ -58,23 +59,24 @@ export class InputComponent implements OnInit {
     }
   }
 
-  private checkEnter(e) {
-    if (e.key === 'Enter') {
-      e.preventDefault();
-
-      this.editable = false;
-
-      for (const destroyable of this.handlers) {
-        destroyable();
-      }
-
-      this.handlers = null;
-
-      this.renderer.removeChild(this.elRef.nativeElement, this.focusTarget.nativeElement);
-      this.focusTarget = null;
-
-      this.line.emit(this.text);
-      this.line.complete();
+  private checkInput(e) {
+    if (this.mode === 'key') {
+      this.complete(e, e.key);
+    } else if (e.key === 'Enter') {
+      this.complete(e, this.text);
     }
+  }
+
+  private complete(e: any, text: string) {
+    e.preventDefault();
+    this.editable = false;
+    for (const destroyable of this.handlers) {
+      destroyable();
+    }
+    this.handlers = null;
+    this.renderer.removeChild(this.elRef.nativeElement, this.focusTarget.nativeElement);
+    this.focusTarget = null;
+    this.line.emit(text);
+    this.line.complete();
   }
 }
