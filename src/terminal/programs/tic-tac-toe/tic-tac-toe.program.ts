@@ -63,7 +63,8 @@ export class TicTacToeProgram extends ProgramBase {
     async playHuman() {
         const renderHuman = () => {
             this.render();
-            this.gameFrame.write('Make your move!');
+            this.gameFrame.write('(↑ = W, ← = A, ↓ = S, → = D)', Color.Magenta);
+            this.gameFrame.write(' Make your move: ');
         };
 
         renderHuman();
@@ -73,15 +74,31 @@ export class TicTacToeProgram extends ProgramBase {
             key = await this.gameFrame.readKey();
             switch (key) {
                 case 'ArrowLeft':
+                case 'a':
+                case 'A':
+                case 'l':
+                case 'L':
                     this.game.moveLeft();
                     break;
                 case 'ArrowRight':
+                case 'd':
+                case 'D':
+                case 'r':
+                case 'R':
                     this.game.moveRight();
                     break;
                 case 'ArrowUp':
+                case 'w':
+                case 'W':
+                case 'u':
+                case 'U':
                     this.game.moveUp();
                     break;
                 case 'ArrowDown':
+                case 'd':
+                case 'D':
+                case 's':
+                case 'S':
                     this.game.moveDown();
                     break;
                 case 'Enter':
