@@ -1427,6 +1427,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 /* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _core_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/color */ "./src/terminal/core/color.ts");
 var __extends = (undefined && undefined.__extends) || (function () {
     var extendStatics = Object.setPrototypeOf ||
         ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
@@ -1481,6 +1482,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+
 var HelpProgram = /** @class */ (function (_super) {
     __extends(HelpProgram, _super);
     function HelpProgram() {
@@ -1495,9 +1497,9 @@ var HelpProgram = /** @class */ (function (_super) {
                 this.frame.writeLine();
                 keys = Object.keys(_program__WEBPACK_IMPORTED_MODULE_1__["PROGRAMS"]).sort();
                 maxLength = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["max"])(keys.map(function (x) { return x.length; }));
-                keys.forEach(function (element) {
-                    _this.frame.writeLine(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["padEnd"])(element, maxLength, ' ') + " | " + _program__WEBPACK_IMPORTED_MODULE_1__["PROGRAMS"][element].description);
-                    _this.frame.writeLine();
+                keys.filter(function (x) { return _program__WEBPACK_IMPORTED_MODULE_1__["PROGRAMS"][x].hide != true; }).forEach(function (element) {
+                    _this.frame.write("" + element, _core_color__WEBPACK_IMPORTED_MODULE_3__["Color"].BrightGreen);
+                    _this.frame.writeLine(": " + _program__WEBPACK_IMPORTED_MODULE_1__["PROGRAMS"][element].description);
                 });
                 this.frame.writeLine();
                 return [2 /*return*/];
@@ -1508,7 +1510,8 @@ var HelpProgram = /** @class */ (function (_super) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
             alias: 'help',
-            description: 'Displays a list of all supported commands.'
+            description: 'Displays a list of all supported commands.',
+            hide: true
         })
     ], HelpProgram);
     return HelpProgram;
@@ -1749,7 +1752,8 @@ var LoginProgram = /** @class */ (function (_super) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
             alias: 'login',
-            description: 'Allow a user to login with a username and password.'
+            description: 'Allow a user to login with a username and password.',
+            hide: true
         }),
         __metadata("design:paramtypes", [_core_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"]])
     ], LoginProgram);
@@ -1811,7 +1815,7 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 var PROGRAMS = {};
 function Program(definition) {
     return function (target) {
-        PROGRAMS[definition.alias] = { target: target.name, description: definition.description };
+        PROGRAMS[definition.alias] = { target: target.name, description: definition.description, hide: definition.hide };
     };
 }
 function makeProgramProvider(type) {
@@ -2011,7 +2015,8 @@ var ShellProgram = /** @class */ (function (_super) {
         Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
         Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
             alias: 'shell',
-            description: 'Starts a new shell that can take commands.'
+            description: 'Starts a new shell that can take commands.',
+            hide: true
         }),
         __metadata("design:paramtypes", [_core_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"], _core_file_system_service__WEBPACK_IMPORTED_MODULE_3__["FileSystemService"], _angular_core__WEBPACK_IMPORTED_MODULE_0__["Injector"]])
     ], ShellProgram);
