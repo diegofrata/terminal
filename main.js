@@ -2652,24 +2652,29 @@ var WhoAmIProgram = /** @class */ (function (_super) {
                     case 1:
                         loadingFrame = _a.sent();
                         loadingFrame.writeLine('Loading... Please wait.');
-                        this.frame.append(src_terminal_core_img_component__WEBPACK_IMPORTED_MODULE_2__["ImgComponent"], function (ref) { return __awaiter(_this, void 0, void 0, function () {
-                            return __generator(this, function (_a) {
-                                switch (_a.label) {
-                                    case 0:
-                                        ref.instance.src = './assets/whoami.svg';
-                                        ref.instance.style = {
-                                            'width': '100%',
-                                            'max-width': '100%',
-                                            'height': 'calc(100vh - 48px)',
-                                        };
-                                        return [4 /*yield*/, ref.instance.loaded.toPromise()];
-                                    case 1:
-                                        _a.sent();
-                                        loadingFrame.clear();
-                                        return [2 /*return*/];
-                                }
-                            });
-                        }); });
+                        return [4 /*yield*/, new Promise(function (r) {
+                                _this.frame.append(src_terminal_core_img_component__WEBPACK_IMPORTED_MODULE_2__["ImgComponent"], function (ref) { return __awaiter(_this, void 0, void 0, function () {
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0:
+                                                ref.instance.src = './assets/whoami.svg';
+                                                ref.instance.style = {
+                                                    'width': '100%',
+                                                    'max-width': '100%',
+                                                    'max-height': 'calc(100vh - 48px)',
+                                                };
+                                                return [4 /*yield*/, ref.instance.loaded.toPromise()];
+                                            case 1:
+                                                _a.sent();
+                                                loadingFrame.clear();
+                                                r();
+                                                return [2 /*return*/];
+                                        }
+                                    });
+                                }); });
+                            })];
+                    case 2:
+                        _a.sent();
                         this.frame.writeLine();
                         return [2 /*return*/];
                 }
