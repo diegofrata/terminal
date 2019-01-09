@@ -1497,6 +1497,7 @@ var HelpProgram = /** @class */ (function (_super) {
                 maxLength = Object(lodash__WEBPACK_IMPORTED_MODULE_2__["max"])(keys.map(function (x) { return x.length; }));
                 keys.forEach(function (element) {
                     _this.frame.writeLine(Object(lodash__WEBPACK_IMPORTED_MODULE_2__["padEnd"])(element, maxLength, ' ') + " | " + _program__WEBPACK_IMPORTED_MODULE_1__["PROGRAMS"][element].description);
+                    _this.frame.writeLine();
                 });
                 this.frame.writeLine();
                 return [2 /*return*/];
