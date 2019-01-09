@@ -498,6 +498,69 @@ var GlitchComponent = /** @class */ (function () {
 
 /***/ }),
 
+/***/ "./src/terminal/core/img.component.ts":
+/*!********************************************!*\
+  !*** ./src/terminal/core/img.component.ts ***!
+  \********************************************/
+/*! exports provided: ImgComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ImgComponent", function() { return ImgComponent; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+
+var ImgComponent = /** @class */ (function () {
+    function ImgComponent() {
+        this.src = '';
+        this.style = {};
+        this.loaded = new _angular_core__WEBPACK_IMPORTED_MODULE_0__["EventEmitter"]();
+    }
+    ImgComponent.prototype.ngAfterViewInit = function () {
+        var _this = this;
+        this.img.nativeElement.onload = function () {
+            _this.loaded.emit();
+            _this.loaded.complete();
+        };
+    };
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["ViewChild"])('img'),
+        __metadata("design:type", Object)
+    ], ImgComponent.prototype, "img", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImgComponent.prototype, "src", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Input"])(),
+        __metadata("design:type", Object)
+    ], ImgComponent.prototype, "style", void 0);
+    __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Output"])(),
+        __metadata("design:type", Object)
+    ], ImgComponent.prototype, "loaded", void 0);
+    ImgComponent = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Component"])({
+            selector: 'terminal-img',
+            template: '<img #img [attr.src]="src" [ngStyle]="style">',
+        })
+    ], ImgComponent);
+    return ImgComponent;
+}());
+
+
+
+/***/ }),
+
 /***/ "./src/terminal/core/input.component.ts":
 /*!**********************************************!*\
   !*** ./src/terminal/core/input.component.ts ***!
@@ -689,10 +752,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "SessionComponent", function() { return SessionComponent; });
 /* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
 /* harmony import */ var _angular_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @angular/router */ "./node_modules/@angular/router/fesm5/router.js");
-/* harmony import */ var _programs_boot_program__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../programs/boot.program */ "./src/terminal/programs/boot.program.ts");
-/* harmony import */ var _programs_login_program__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../programs/login.program */ "./src/terminal/programs/login.program.ts");
-/* harmony import */ var _programs_shell_program__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../programs/shell.program */ "./src/terminal/programs/shell.program.ts");
-/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
+/* harmony import */ var _programs_login_program__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../programs/login.program */ "./src/terminal/programs/login.program.ts");
+/* harmony import */ var _programs_shell_program__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../programs/shell.program */ "./src/terminal/programs/shell.program.ts");
+/* harmony import */ var rxjs_operators__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! rxjs/operators */ "./node_modules/rxjs/_esm5/operators/index.js");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -742,50 +804,46 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
-
 var SessionComponent = /** @class */ (function () {
     function SessionComponent(injector, router) {
         var _this = this;
         this.injector = injector;
-        router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["filter"])(function (x) { return x instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivationEnd"]; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_5__["first"])()).subscribe(function (x) { return __awaiter(_this, void 0, void 0, function () {
-            var boot, login, shell, _a, _b, _c, _d, _e, _f, _g, _h, _j, _k;
-            return __generator(this, function (_l) {
-                switch (_l.label) {
+        router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (x) { return x instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivationEnd"]; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (x) { return __awaiter(_this, void 0, void 0, function () {
+            var login, shell, _a, _b, _c, _d, _e, _f, _g, _h;
+            return __generator(this, function (_j) {
+                switch (_j.label) {
                     case 0:
                         this.params = x.snapshot.paramMap;
-                        boot = this.injector.get(_programs_boot_program__WEBPACK_IMPORTED_MODULE_2__["BootProgram"]);
-                        login = this.injector.get(_programs_login_program__WEBPACK_IMPORTED_MODULE_3__["LoginProgram"]);
-                        shell = this.injector.get(_programs_shell_program__WEBPACK_IMPORTED_MODULE_4__["ShellProgram"]);
+                        login = this.injector.get(_programs_login_program__WEBPACK_IMPORTED_MODULE_2__["LoginProgram"]);
+                        shell = this.injector.get(_programs_shell_program__WEBPACK_IMPORTED_MODULE_3__["ShellProgram"]);
                         if (!this.params.keys.length) return [3 /*break*/, 5];
                         _b = (_a = login).run;
                         return [4 /*yield*/, this.terminal.createFrame()];
-                    case 1: return [4 /*yield*/, _b.apply(_a, [_l.sent(), [this.params.get('user'), this.params.get('pwd')]])];
+                    case 1: return [4 /*yield*/, _b.apply(_a, [_j.sent(), [this.params.get('user'), this.params.get('pwd')]])];
                     case 2:
-                        _l.sent();
+                        _j.sent();
                         _d = (_c = shell).run;
                         return [4 /*yield*/, this.terminal.createFrame()];
-                    case 3: return [4 /*yield*/, _d.apply(_c, [_l.sent(), [this.params.get('program')]])];
+                    case 3: return [4 /*yield*/, _d.apply(_c, [_j.sent(), [this.params.get('program')]])];
                     case 4:
-                        _l.sent();
-                        return [3 /*break*/, 12];
+                        _j.sent();
+                        return [3 /*break*/, 10];
                     case 5:
-                        _f = (_e = boot).run;
+                        _f = (_e = login).run;
                         return [4 /*yield*/, this.terminal.createFrame()];
-                    case 6: return [4 /*yield*/, _f.apply(_e, [_l.sent(), []])];
+                    case 6: 
+                    // await boot.run(await this.terminal.createFrame(), []);
+                    return [4 /*yield*/, _f.apply(_e, [_j.sent(), []])];
                     case 7:
-                        _l.sent();
-                        _h = (_g = login).run;
+                        // await boot.run(await this.terminal.createFrame(), []);
+                        _j.sent();
+                        _h = (_g = shell).run;
                         return [4 /*yield*/, this.terminal.createFrame()];
-                    case 8: return [4 /*yield*/, _h.apply(_g, [_l.sent(), []])];
+                    case 8: return [4 /*yield*/, _h.apply(_g, [_j.sent(), []])];
                     case 9:
-                        _l.sent();
-                        _k = (_j = shell).run;
-                        return [4 /*yield*/, this.terminal.createFrame()];
-                    case 10: return [4 /*yield*/, _k.apply(_j, [_l.sent(), []])];
-                    case 11:
-                        _l.sent();
-                        _l.label = 12;
-                    case 12: return [2 /*return*/];
+                        _j.sent();
+                        _j.label = 10;
+                    case 10: return [2 /*return*/];
                 }
             });
         }); });
@@ -1262,111 +1320,6 @@ var BootProgram = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/terminal/programs/change-directory.program.ts":
-/*!***********************************************************!*\
-  !*** ./src/terminal/programs/change-directory.program.ts ***!
-  \***********************************************************/
-/*! exports provided: ChangeDirectoryProgram */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ChangeDirectoryProgram", function() { return ChangeDirectoryProgram; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
-/* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/file-system.service */ "./src/terminal/core/file-system.service.ts");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-var ChangeDirectoryProgram = /** @class */ (function (_super) {
-    __extends(ChangeDirectoryProgram, _super);
-    function ChangeDirectoryProgram(fs) {
-        var _this = _super.call(this) || this;
-        _this.fs = fs;
-        return _this;
-    }
-    ChangeDirectoryProgram.prototype.main = function (args) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                try {
-                    this.fs.changeDirectory(args[0]);
-                }
-                catch (e) {
-                    this.frame.writeLine(e);
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    ChangeDirectoryProgram = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
-            alias: 'cd',
-            description: 'Changes to a different directory.'
-        }),
-        __metadata("design:paramtypes", [_core_file_system_service__WEBPACK_IMPORTED_MODULE_2__["FileSystemService"]])
-    ], ChangeDirectoryProgram);
-    return ChangeDirectoryProgram;
-}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
-
-
-
-/***/ }),
-
 /***/ "./src/terminal/programs/clear.program.ts":
 /*!************************************************!*\
   !*** ./src/terminal/programs/clear.program.ts ***!
@@ -1454,102 +1407,6 @@ var ClearProgram = /** @class */ (function (_super) {
         })
     ], ClearProgram);
     return ClearProgram;
-}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
-
-
-
-/***/ }),
-
-/***/ "./src/terminal/programs/count.program.ts":
-/*!************************************************!*\
-  !*** ./src/terminal/programs/count.program.ts ***!
-  \************************************************/
-/*! exports provided: CountProgram */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "CountProgram", function() { return CountProgram; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-var CountProgram = /** @class */ (function (_super) {
-    __extends(CountProgram, _super);
-    function CountProgram() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    CountProgram.prototype.main = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var i;
-            return __generator(this, function (_a) {
-                i = 0;
-                while (i < 50) {
-                    this.frame.writeLine((++i).toString());
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    CountProgram = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
-            alias: 'count',
-            description: 'Counts to 50.'
-        })
-    ], CountProgram);
-    return CountProgram;
 }(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
 
 
@@ -1752,112 +1609,6 @@ var HiProgram = /** @class */ (function (_super) {
 
 /***/ }),
 
-/***/ "./src/terminal/programs/list-directory.program.ts":
-/*!*********************************************************!*\
-  !*** ./src/terminal/programs/list-directory.program.ts ***!
-  \*********************************************************/
-/*! exports provided: ListDirectoryProgram */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ListDirectoryProgram", function() { return ListDirectoryProgram; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
-/* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/file-system.service */ "./src/terminal/core/file-system.service.ts");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-var ListDirectoryProgram = /** @class */ (function (_super) {
-    __extends(ListDirectoryProgram, _super);
-    function ListDirectoryProgram(fs) {
-        var _this = _super.call(this) || this;
-        _this.fs = fs;
-        return _this;
-    }
-    ListDirectoryProgram.prototype.main = function (args) {
-        return __awaiter(this, void 0, void 0, function () {
-            var _i, _a, item;
-            return __generator(this, function (_b) {
-                for (_i = 0, _a = this.fs.currentDirectory.children; _i < _a.length; _i++) {
-                    item = _a[_i];
-                    this.frame.write(item.name + '\t\t');
-                }
-                if (this.fs.currentDirectory.children.length)
-                    this.frame.writeLine();
-                return [2 /*return*/];
-            });
-        });
-    };
-    ListDirectoryProgram = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
-            alias: 'ls',
-            description: 'List all directories and files in a directory.'
-        }),
-        __metadata("design:paramtypes", [_core_file_system_service__WEBPACK_IMPORTED_MODULE_2__["FileSystemService"]])
-    ], ListDirectoryProgram);
-    return ListDirectoryProgram;
-}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
-
-
-
-/***/ }),
-
 /***/ "./src/terminal/programs/login.program.ts":
 /*!************************************************!*\
   !*** ./src/terminal/programs/login.program.ts ***!
@@ -1939,6 +1690,22 @@ var LoginProgram = /** @class */ (function (_super) {
     }
     LoginProgram.prototype.main = function (args) {
         return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        if (args == null || args.length < 2) {
+                            this.frame.writeLine('Welcome to frata.io. Before we start, please identify yourself.');
+                        }
+                        return [4 /*yield*/, this.loop(args)];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    LoginProgram.prototype.loop = function (args) {
+        return __awaiter(this, void 0, void 0, function () {
             var username, password, e_1;
             return __generator(this, function (_a) {
                 switch (_a.label) {
@@ -1968,7 +1735,7 @@ var LoginProgram = /** @class */ (function (_super) {
                     case 5:
                         e_1 = _a.sent();
                         this.frame.writeLine(e_1, _core_color__WEBPACK_IMPORTED_MODULE_3__["Color"].Red);
-                        return [4 /*yield*/, this.main([])];
+                        return [4 /*yield*/, this.loop(args)];
                     case 6:
                         _a.sent();
                         return [3 /*break*/, 7];
@@ -1986,113 +1753,6 @@ var LoginProgram = /** @class */ (function (_super) {
         __metadata("design:paramtypes", [_core_login_service__WEBPACK_IMPORTED_MODULE_2__["LoginService"]])
     ], LoginProgram);
     return LoginProgram;
-}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
-
-
-
-/***/ }),
-
-/***/ "./src/terminal/programs/make-directory.program.ts":
-/*!*********************************************************!*\
-  !*** ./src/terminal/programs/make-directory.program.ts ***!
-  \*********************************************************/
-/*! exports provided: MakeDirectoryProgram */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "MakeDirectoryProgram", function() { return MakeDirectoryProgram; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
-/* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/file-system.service */ "./src/terminal/core/file-system.service.ts");
-/* harmony import */ var _core_color__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/color */ "./src/terminal/core/color.ts");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-var MakeDirectoryProgram = /** @class */ (function (_super) {
-    __extends(MakeDirectoryProgram, _super);
-    function MakeDirectoryProgram(fs) {
-        var _this = _super.call(this) || this;
-        _this.fs = fs;
-        return _this;
-    }
-    MakeDirectoryProgram.prototype.main = function (args) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                try {
-                    this.fs.createDirectory(args[0]);
-                }
-                catch (e) {
-                    this.frame.writeLine(e, _core_color__WEBPACK_IMPORTED_MODULE_3__["Color"].Red);
-                }
-                return [2 /*return*/];
-            });
-        });
-    };
-    MakeDirectoryProgram = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
-            alias: 'mkdir',
-            description: 'Creates a new directory.'
-        }),
-        __metadata("design:paramtypes", [_core_file_system_service__WEBPACK_IMPORTED_MODULE_2__["FileSystemService"]])
-    ], MakeDirectoryProgram);
-    return MakeDirectoryProgram;
 }(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
 
 
@@ -2910,6 +2570,131 @@ var TicTacToeProgram = /** @class */ (function (_super) {
 
 /***/ }),
 
+/***/ "./src/terminal/programs/whoami/whoami.program.ts":
+/*!********************************************************!*\
+  !*** ./src/terminal/programs/whoami/whoami.program.ts ***!
+  \********************************************************/
+/*! exports provided: WhoAmIProgram */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "WhoAmIProgram", function() { return WhoAmIProgram; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../program */ "./src/terminal/programs/program.ts");
+/* harmony import */ var src_terminal_core_img_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! src/terminal/core/img.component */ "./src/terminal/core/img.component.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+var WhoAmIProgram = /** @class */ (function (_super) {
+    __extends(WhoAmIProgram, _super);
+    function WhoAmIProgram() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    WhoAmIProgram.prototype.main = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _this = this;
+            var loadingFrame;
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0: return [4 /*yield*/, this.frame.createFrame()];
+                    case 1:
+                        loadingFrame = _a.sent();
+                        loadingFrame.writeLine('Loading... Please wait.');
+                        return [4 /*yield*/, new Promise(function (r) {
+                                _this.frame.append(src_terminal_core_img_component__WEBPACK_IMPORTED_MODULE_2__["ImgComponent"], function (ref) { return __awaiter(_this, void 0, void 0, function () {
+                                    return __generator(this, function (_a) {
+                                        switch (_a.label) {
+                                            case 0:
+                                                ref.instance.src = './assets/whoami.svg';
+                                                ref.instance.style = {
+                                                    'width': '100%',
+                                                    'max-width': '100%',
+                                                    'height': 'calc(100vh - 48px)',
+                                                };
+                                                return [4 /*yield*/, ref.instance.loaded.toPromise()];
+                                            case 1:
+                                                _a.sent();
+                                                loadingFrame.clear();
+                                                r();
+                                                return [2 /*return*/];
+                                        }
+                                    });
+                                }); });
+                            })];
+                    case 2:
+                        _a.sent();
+                        this.frame.writeLine();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    WhoAmIProgram = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
+            alias: 'whoami',
+            description: 'Mirror mirror on the wall...'
+        })
+    ], WhoAmIProgram);
+    return WhoAmIProgram;
+}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
+
+
+
+/***/ }),
+
 /***/ "./src/terminal/terminal.module.ts":
 /*!*****************************************!*\
   !*** ./src/terminal/terminal.module.ts ***!
@@ -2938,15 +2723,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _programs_login_program__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ./programs/login.program */ "./src/terminal/programs/login.program.ts");
 /* harmony import */ var _core_login_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./core/login.service */ "./src/terminal/core/login.service.ts");
 /* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./core/file-system.service */ "./src/terminal/core/file-system.service.ts");
-/* harmony import */ var _programs_make_directory_program__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./programs/make-directory.program */ "./src/terminal/programs/make-directory.program.ts");
-/* harmony import */ var _programs_list_directory_program__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./programs/list-directory.program */ "./src/terminal/programs/list-directory.program.ts");
-/* harmony import */ var _programs_change_directory_program__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./programs/change-directory.program */ "./src/terminal/programs/change-directory.program.ts");
-/* harmony import */ var _programs_clear_program__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./programs/clear.program */ "./src/terminal/programs/clear.program.ts");
-/* harmony import */ var _programs_boot_program__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./programs/boot.program */ "./src/terminal/programs/boot.program.ts");
-/* harmony import */ var _core_glitch_component__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./core/glitch.component */ "./src/terminal/core/glitch.component.ts");
-/* harmony import */ var _programs_count_program__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./programs/count.program */ "./src/terminal/programs/count.program.ts");
-/* harmony import */ var _programs_help_program__WEBPACK_IMPORTED_MODULE_25__ = __webpack_require__(/*! ./programs/help.program */ "./src/terminal/programs/help.program.ts");
-/* harmony import */ var _programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_26__ = __webpack_require__(/*! ./programs/tic-tac-toe/tic-tac-toe.program */ "./src/terminal/programs/tic-tac-toe/tic-tac-toe.program.ts");
+/* harmony import */ var _programs_clear_program__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./programs/clear.program */ "./src/terminal/programs/clear.program.ts");
+/* harmony import */ var _programs_boot_program__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./programs/boot.program */ "./src/terminal/programs/boot.program.ts");
+/* harmony import */ var _core_glitch_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./core/glitch.component */ "./src/terminal/core/glitch.component.ts");
+/* harmony import */ var _programs_help_program__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./programs/help.program */ "./src/terminal/programs/help.program.ts");
+/* harmony import */ var _programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./programs/tic-tac-toe/tic-tac-toe.program */ "./src/terminal/programs/tic-tac-toe/tic-tac-toe.program.ts");
+/* harmony import */ var _programs_whoami_whoami_program__WEBPACK_IMPORTED_MODULE_23__ = __webpack_require__(/*! ./programs/whoami/whoami.program */ "./src/terminal/programs/whoami/whoami.program.ts");
+/* harmony import */ var _core_img_component__WEBPACK_IMPORTED_MODULE_24__ = __webpack_require__(/*! ./core/img.component */ "./src/terminal/core/img.component.ts");
 var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
     var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
     if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
@@ -2978,16 +2761,15 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-
-
-var programs = Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_boot_program__WEBPACK_IMPORTED_MODULE_22__["BootProgram"]).concat(Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_change_directory_program__WEBPACK_IMPORTED_MODULE_20__["ChangeDirectoryProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_clear_program__WEBPACK_IMPORTED_MODULE_21__["ClearProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_count_program__WEBPACK_IMPORTED_MODULE_24__["CountProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_hi_program__WEBPACK_IMPORTED_MODULE_12__["HiProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_list_directory_program__WEBPACK_IMPORTED_MODULE_19__["ListDirectoryProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_login_program__WEBPACK_IMPORTED_MODULE_15__["LoginProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_make_directory_program__WEBPACK_IMPORTED_MODULE_18__["MakeDirectoryProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_shell_program__WEBPACK_IMPORTED_MODULE_9__["ShellProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_help_program__WEBPACK_IMPORTED_MODULE_25__["HelpProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_26__["TicTacToeProgram"]));
+var programs = Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_boot_program__WEBPACK_IMPORTED_MODULE_19__["BootProgram"]).concat(Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_clear_program__WEBPACK_IMPORTED_MODULE_18__["ClearProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_hi_program__WEBPACK_IMPORTED_MODULE_12__["HiProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_login_program__WEBPACK_IMPORTED_MODULE_15__["LoginProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_shell_program__WEBPACK_IMPORTED_MODULE_9__["ShellProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_help_program__WEBPACK_IMPORTED_MODULE_21__["HelpProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_22__["TicTacToeProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_whoami_whoami_program__WEBPACK_IMPORTED_MODULE_23__["WhoAmIProgram"]));
 var entryComponents = [
     _core_caret_component__WEBPACK_IMPORTED_MODULE_7__["CaretComponent"],
     _core_text_component__WEBPACK_IMPORTED_MODULE_6__["TextComponent"],
     _core_line_break_component__WEBPACK_IMPORTED_MODULE_5__["LineBreakComponent"],
     _core_frame_component__WEBPACK_IMPORTED_MODULE_10__["FrameComponent"],
     _core_input_component__WEBPACK_IMPORTED_MODULE_11__["InputComponent"],
-    _core_glitch_component__WEBPACK_IMPORTED_MODULE_23__["GlitchComponent"]
+    _core_glitch_component__WEBPACK_IMPORTED_MODULE_20__["GlitchComponent"],
+    _core_img_component__WEBPACK_IMPORTED_MODULE_24__["ImgComponent"]
 ];
 var TerminalModule = /** @class */ (function () {
     function TerminalModule() {
