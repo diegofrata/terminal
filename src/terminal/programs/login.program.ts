@@ -15,6 +15,15 @@ export class LoginProgram extends ProgramBase {
     }
 
     async main(args: string[]) {
+        if (args == null || args.length < 2) {
+            this.frame.writeLine('Welcome to frata.io. Before we start, please identify yourself.');
+        }
+
+        await this.loop(args);
+    }
+
+    async loop(args: string[]) {
+
         let username, password;
         if (args && args.length >= 2) {
             username = args[0];
@@ -34,7 +43,7 @@ export class LoginProgram extends ProgramBase {
             this.frame.writeLine('Welcome back. Type \'help\' to see a list of supported commands.');
         } catch (e) {
             this.frame.writeLine(e, Color.Red);
-            await this.main([]);
+            await this.loop(args);
         }
     }
 }

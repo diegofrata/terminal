@@ -25,19 +25,22 @@ import { GlitchComponent } from './core/glitch.component';
 import { CountProgram } from './programs/count.program';
 import { HelpProgram } from './programs/help.program';
 import { TicTacToeProgram } from './programs/tic-tac-toe/tic-tac-toe.program';
+import { WhoAmIProgram } from './programs/whoami/whoami.program';
+import { ImgComponent } from './core/img.component';
 
 const programs = [
   ...makeProgramProvider(BootProgram),
-  ...makeProgramProvider(ChangeDirectoryProgram),
+  // ...makeProgramProvider(ChangeDirectoryProgram),
   ...makeProgramProvider(ClearProgram),
-  ...makeProgramProvider(CountProgram),
+  // ...makeProgramProvider(CountProgram),
   ...makeProgramProvider(HiProgram),
-  ...makeProgramProvider(ListDirectoryProgram),
+  // ...makeProgramProvider(ListDirectoryProgram),
   ...makeProgramProvider(LoginProgram),
-  ...makeProgramProvider(MakeDirectoryProgram),
+  // ...makeProgramProvider(MakeDirectoryProgram),
   ...makeProgramProvider(ShellProgram),
   ...makeProgramProvider(HelpProgram),
   ...makeProgramProvider(TicTacToeProgram),
+  ...makeProgramProvider(WhoAmIProgram),
 ]
 
 const entryComponents = [
@@ -46,7 +49,8 @@ const entryComponents = [
   LineBreakComponent,
   FrameComponent,
   InputComponent,
-  GlitchComponent
+  GlitchComponent,
+  ImgComponent
 ];
 
 @NgModule({

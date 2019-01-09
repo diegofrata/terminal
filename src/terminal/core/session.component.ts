@@ -18,14 +18,14 @@ export class SessionComponent {
         router.events.pipe(filter(x => x instanceof ActivationEnd), first()).subscribe(async (x: ActivationEnd) => {
             this.params = x.snapshot.paramMap;
 
-            const boot = this.injector.get(BootProgram);
+            // const boot = this.injector.get(BootProgram);
             const login = this.injector.get(LoginProgram);
             const shell = this.injector.get(ShellProgram);
             if (this.params.keys.length) {
                 await login.run(await this.terminal.createFrame(), [this.params.get('user'), this.params.get('pwd')]);
                 await shell.run(await this.terminal.createFrame(), [this.params.get('program')]);
             } else {
-                await boot.run(await this.terminal.createFrame(), []);
+                // await boot.run(await this.terminal.createFrame(), []);
                 await login.run(await this.terminal.createFrame(), []);
                 await shell.run(await this.terminal.createFrame(), []);
             }
