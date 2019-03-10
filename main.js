@@ -372,6 +372,7 @@ var FrameComponent = /** @class */ (function () {
         this.index = 0;
         this.initialized = new _angular_core__WEBPACK_IMPORTED_MODULE_2__["EventEmitter"]();
         this.forceScrolling = false;
+        this.children = [];
     }
     FrameComponent_1 = FrameComponent;
     FrameComponent.prototype.ngAfterViewInit = function () {
@@ -417,6 +418,7 @@ var FrameComponent = /** @class */ (function () {
     };
     FrameComponent.prototype.clear = function () {
         this.content.viewContainerRef.clear();
+        this.children = [];
         this.index = 0;
     };
     FrameComponent.prototype.createFrame = function () {
@@ -432,6 +434,7 @@ var FrameComponent = /** @class */ (function () {
                             c.instance.parent = _this;
                             instance = c.instance;
                         });
+                        this.children.push(instance);
                         return [2 /*return*/, instance];
                 }
             });
@@ -987,339 +990,6 @@ function sleeper(ms) {
 
 /***/ }),
 
-/***/ "./src/terminal/programs/boot.program.ts":
-/*!***********************************************!*\
-  !*** ./src/terminal/programs/boot.program.ts ***!
-  \***********************************************/
-/*! exports provided: BootProgram */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BootProgram", function() { return BootProgram; });
-/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
-/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
-/* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/file-system.service */ "./src/terminal/core/file-system.service.ts");
-/* harmony import */ var _core_glitch_component__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/glitch.component */ "./src/terminal/core/glitch.component.ts");
-/* harmony import */ var _core_util__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../core/util */ "./src/terminal/core/util.ts");
-var __extends = (undefined && undefined.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
-    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
-    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
-    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
-    return c > 3 && r && Object.defineProperty(target, key, r), r;
-};
-var __metadata = (undefined && undefined.__metadata) || function (k, v) {
-    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
-};
-var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
-var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
-    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
-    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
-    function verb(n) { return function (v) { return step([n, v]); }; }
-    function step(op) {
-        if (f) throw new TypeError("Generator is already executing.");
-        while (_) try {
-            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
-            if (y = 0, t) op = [0, t.value];
-            switch (op[0]) {
-                case 0: case 1: t = op; break;
-                case 4: _.label++; return { value: op[1], done: false };
-                case 5: _.label++; y = op[1]; op = [0]; continue;
-                case 7: op = _.ops.pop(); _.trys.pop(); continue;
-                default:
-                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
-                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
-                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
-                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
-                    if (t[2]) _.ops.pop();
-                    _.trys.pop(); continue;
-            }
-            op = body.call(thisArg, _);
-        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
-        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
-    }
-};
-
-
-
-
-
-var BootProgram = /** @class */ (function (_super) {
-    __extends(BootProgram, _super);
-    function BootProgram(fs) {
-        var _this = _super.call(this) || this;
-        _this.fs = fs;
-        _this.log = [
-            "Uncompressing Linux... done, booting the kernel.",
-            "Booting Linux on physical CPU 0x0",
-            "Initializing cgroup subsys cpu",
-            "Initializing cgroup subsys cpuacct",
-            "Linux version 3.18.10+ (dc4@dc4-XPS13-9333) (gcc version 4.8.3 20140303 (prerelease) (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03)) #775 PREEMPT Thu Apr 2 18:10:12 BST 2015",
-            "CPU: ARMv6-compatible processor [410fb767] revision 7 (ARMv7), cr=00c5387d",
-            "CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache",
-            "Machine model: Raspberry Pi Model B",
-            "cma: Reserved 8 MiB at 0x0b800000",
-            "Memory policy: Data cache writeback",
-            "Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 48768",
-            "Kernel command line: dma.dmachans=0x7f35 bcm2708_fb.fbwidth=656 bcm2708_fb.fbheight=416 bcm2708.boardrev=0x2 bcm2708.serial=0xb51cb961 smsc95x.macaddr=B8:27:EB:1C:B9:61 bcm2708_fb.fbswap=1 sdhci-bcm2708.emmc_clock_freq=250000000 vc_mem.mem_base=0xec00000 vc_mem.mem_size=0x10000000  dwc_otg.lpm_enabe=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait",
-            "PID hash table entries: 1024 (order: 0, 4096 bytes)",
-            "Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)",
-            "Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)",
-            "Memory: 177372K/196608K available (5885K kernel code, 348K rwdata, 1868K rodata, 340K init, 733K bss, 19236K reserved)",
-            "Virtual kernel memory layout:",
-            "    vector  : 0xffff0000 - 0xffff1000   (   4 kB)",
-            "    fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)",
-            "    vmalloc : 0xcc800000 - 0xff000000   ( 808 MB)",
-            "    lowmem  : 0xc0000000 - 0xcc000000   ( 192 MB)",
-            "    modules : 0xbf000000 - 0xc0000000   (  16 MB)",
-            "        .text : 0xc0008000 - 0xc079a78c   (7754 kB)",
-            "        .init : 0xc079b000 - 0xc07f0000   ( 340 kB)",
-            "        .data : 0xc07f0000 - 0xc084711c   ( 349 kB)",
-            "        .bss : 0xc084711c - 0xc08fe848   ( 734 kB)",
-            "SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1",
-            "Preemptible hierarchical RCU implementation.",
-            "NR_IRQS:522",
-            "sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483648000ns",
-            "Switching to timer-based delay loop, resolution 1000ns",
-            "Console: colour dummy device 80x30",
-            "console [tty1] enabled",
-            "Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=10000)",
-            "pid_max: default: 32768 minimum: 301",
-            "Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)",
-            "Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)",
-            "Initializing cgroup subsys memory",
-            "Initializing cgroup subsys devices",
-            "Initializing cgroup subsys freezer",
-            "Initializing cgroup subsys net_cls",
-            "Initializing cgroup subsys blkio",
-            "CPU: Testing write buffer coherency: ok",
-            "ftrace: allocating 19229 entries in 57 pages",
-            "Setting up static identity map for 0x553698 - 0x5536d0",
-            "devtmpfs: initialized",
-            "VFP support v0.3: implementor 41 architecture 1 part 20 variant b rev 5",
-            "pinctrl core: initialized pinctrl subsystem",
-            "NET: Registered protocol family 16",
-            "DMA: preallocated 4096 KiB pool for atomic coherent allocations",
-            "bcm2708.uart_clock = 3000000",
-            "No ATAGs?",
-            "hw-breakpoint: found 6 breakpoint and 1 watchpoint registers.",
-            "hw-breakpoint: maximum watchpoint size is 4 bytes.",
-            "mailbox: Broadcom VideoCore Mailbox driver",
-            "bcm2708_vcio: mailbox at f200b880",
-            "bcm_power: Broadcom power driver",
-            "bcm_power_open() -> 0",
-            "bcm_power_request(0, 8)",
-            "bcm_mailbox_read -> 00000080, 0",
-            "bcm_power_request -> 0",
-            "Serial: AMBA PL011 UART driver",
-            "dev:f1: ttyAMA0 at MMIO 0x20201000 (irq = 83, base_baud = 0) is a PL011 rev3",
-            "console [ttyAMA0] enabled",
-            "SCSI subsystem initialized",
-            "usbcore: registered new interface driver usbfs",
-            "usbcore: registered new interface driver hub",
-            "usbcore: registered new device driver usb",
-            "Switched to clocksource stc",
-            "FS-Cache: Loaded",
-            "CacheFiles: Loaded",
-            "NET: Registered protocol family 2",
-            "TCP established hash table entries: 2048 (order: 1, 8192 bytes)",
-            "TCP bind hash table entries: 2048 (order: 1, 8192 bytes)",
-            "TCP: Hash tables configured (established 2048 bind 2048)",
-            "TCP: reno registered",
-            "UDP hash table entries: 256 (order: 0, 4096 bytes)",
-            "UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)",
-            "NET: Registered protocol family 1",
-            "RPC: Registered named UNIX socket transport module.",
-            "RPC: Registered udp transport module.",
-            "RPC: Registered tcp transport module.",
-            "RPC: Registered tcp NFSv4.1 backchannel transport module.",
-            "bcm2708_dma: DMA manager at f2007000",
-            "vc-mem: phys_addr:0x00000000 mem_base=0x0ec00000 mem_size:0x10000000(256 MiB)",
-            "futex hash table entries: 256 (order: -1, 3072 bytes)",
-            "audit: initializing netlink subsys (disabled)",
-            "audit: type=2000 audit(1.030:1): initialized",
-            "VFS: Disk quotas dquot_6.5.2",
-            "Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)",
-            "FS-Cache: Netfs 'nfs' registered for caching",
-            "NFS: Registering the id_resolver key type",
-            "Key type id_resolver registered",
-            "Key type id_legacy registered",
-            "msgmni has been set to 362",
-            "Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)",
-            "io scheduler noop registered",
-            "io scheduler deadline registered (default)",
-            "io scheduler cfq registered",
-            "BCM2708FB: allocated DMA memory 4bc00000",
-            "BCM2708FB: allocated DMA channel 0 @ f2007000",
-            "Console: switching to colour frame buffer device 82x26",
-            "bcm2708-dmaengine bcm2708-dmaengine: Load BCM2835 DMA engine driver",
-            "uart-pl011 dev:f1: no DMA platform data",
-            "vc-cma: Videocore CMA driver",
-            "vc-cma: vc_cma_base      = 0x00000000",
-            "vc-cma: vc_cma_size      = 0x00000000 (0 MiB)",
-            "vc-cma: vc_cma_initial   = 0x00000000 (0 MiB)",
-            "brd: module loaded",
-            "loop: module loaded",
-            "vchiq: vchiq_init_state: slot_zero = 0xcb800000, is_master = 0",
-            "Loading iSCSI transport class v2.0-870.",
-            "usbcore: registered new interface driver smsc95xx",
-            "dwc_otg: version 3.00a 10-AUG-2012 (platform bus)",
-            "Core Release: 2.80a",
-            "Setting default values for core params",
-            "Finished setting default values for core params",
-            "Using Buffer DMA mode",
-            "Periodic Transfer Interrupt Enhancement - disabled",
-            "Multiprocessor Interrupt Enhancement - disabled",
-            "OTG VER PARAM: 0, OTG VER FLAG: 0",
-            "Dedicated Tx FIFOs mode",
-            "WARN::dwc_otg_hcd_init:1047: FIQ DMA bounce buffers: virt = 0xcbc14000 dma = 0x4bc14000 len=9024",
-            "FIQ FSM acceleration enabled for :",
-            "Non-periodic Split Transactions",
-            "Periodic Split Transactions",
-            "High-Speed Isochronous Endpoints",
-            "WARN::hcd_init_fiq:412: FIQ on core 0 at 0xc03fad8c",
-            "WARN::hcd_init_fiq:413: FIQ ASM at 0xc03fb064 length 36",
-            "WARN::hcd_init_fiq:438: MPHI regs_base at 0xcc806000",
-            "dwc_otg bcm2708_usb: DWC OTG Controller",
-            "dwc_otg bcm2708_usb: new USB bus registered, assigned bus number 1",
-            "dwc_otg bcm2708_usb: irq 32, io mem 0x00000000",
-            "Init: Port Power? op_state=1",
-            "Init: Power Port (0)",
-            "usb usb1: New USB device found, idVendor=1d6b, idProduct=0002",
-            "usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1",
-            "usb usb1: Product: DWC OTG Controller",
-            "usb usb1: Manufacturer: Linux 3.18.10+ dwc_otg_hcd",
-            "usb usb1: SerialNumber: bcm2708_usb",
-            "hub 1-0:1.0: USB hub found",
-            "hub 1-0:1.0: 1 port detected",
-            "usbcore: registered new interface driver usb-storage",
-            "mousedev: PS/2 mouse device common for all mice",
-            "bcm2835-cpufreq: min=700000 max=700000",
-            "sdhci: Secure Digital Host Controller Interface driver",
-            "sdhci: Copyright(c) Pierre Ossman",
-            "DMA channels allocated for the MMC driver",
-            "Load BCM2835 MMC driver",
-            "sdhci-pltfm: SDHCI platform and OF driver helper",
-            "ledtrig-cpu: registered to indicate activity on CPUs",
-            "hidraw: raw HID events driver (C) Jiri Kosina",
-            "usbcore: registered new interface driver usbhid",
-            "usbhid: USB HID core driver",
-            "TCP: cubic registered",
-            "Initializing XFRM netlink socket",
-            "NET: Registered protocol family 17",
-            "Key type dns_resolver registered",
-            "registered taskstats version 1",
-            "vc-sm: Videocore shared memory driver",
-            "[vc_sm_connected_init]: start",
-            "[vc_sm_connected_init]: end - returning 0",
-            "Waiting for root device /dev/mmcblk0p2...",
-            "Indeed it is in host mode hprt0 = 00021501",
-            "mmc0: host does not support reading read-only switch, assuming write-enable",
-            "mmc0: new high speed SDHC card at address b368",
-            "mmcblk0: mmc0:b368 SMI   15.0 GiB",
-            "    mmcblk0: p1 p2",
-            "EXT4-fs (mmcblk0p2): INFO: recovery required on readonly filesystem",
-            "EXT4-fs (mmcblk0p2): write access will be enabled during recovery",
-            "EXT4-fs (mmcblk0p2): recovery complete",
-            "EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)",
-            "usb 1-1: new high-speed USB device number 2 using dwc_otg",
-            "VFS: Mounted root (ext4 filesystem) readonly on device 179:2.",
-            "Indeed it is in host mode hprt0 = 00001101",
-            "devtmpfs: mounted",
-            "Freeing unused kernel memory: 340K (c079b000 - c07f0000)",
-            "usb 1-1: New USB device found, idVendor=0424, idProduct=9512",
-            "usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0",
-            "hub 1-1:1.0: USB hub found",
-            "hub 1-1:1.0: 3 ports detected",
-            "usb 1-1.1: new high-speed USB device number 3 using dwc_otg",
-            "usb 1-1.1: New USB device found, idVendor=0424, idProduct=ec00",
-            "usb 1-1.1: New USB device strings: Mfr=0, Product=0, SerialNumber=0",
-            "smsc95xx v1.0.4",
-            "smsc95xx 1-1.1:1.0 eth0: register 'smsc95xx' at usb-bcm2708_usb-1.1, smsc95xx USB 2.0 Ethernet, b8:27:eb:1c:b9:61",
-            "udevd[159]: starting version 175",
-            "EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)",
-            "EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)",
-            "random: nonblocking pool is initialized",
-            "Driver for 1-wire Dallas network protocol.",
-            "i2c /dev entries driver",
-        ];
-        return _this;
-    }
-    BootProgram.prototype.main = function (args) {
-        return __awaiter(this, void 0, void 0, function () {
-            return __generator(this, function (_a) {
-                switch (_a.label) {
-                    case 0:
-                        this.frame.enableForceScrolling();
-                        return [4 /*yield*/, this.simulateBoot()];
-                    case 1:
-                        _a.sent();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    BootProgram.prototype.simulateBoot = function () {
-        return __awaiter(this, void 0, void 0, function () {
-            var _i, _a, line, ms;
-            return __generator(this, function (_b) {
-                switch (_b.label) {
-                    case 0:
-                        this.frame.append(_core_glitch_component__WEBPACK_IMPORTED_MODULE_3__["GlitchComponent"], function (c) { return c.instance.text = 'frataOS'; });
-                        return [4 /*yield*/, Object(_core_util__WEBPACK_IMPORTED_MODULE_4__["sleeper"])(1000)];
-                    case 1:
-                        _b.sent();
-                        this.frame.clear();
-                        _i = 0, _a = this.log;
-                        _b.label = 2;
-                    case 2:
-                        if (!(_i < _a.length)) return [3 /*break*/, 5];
-                        line = _a[_i];
-                        this.frame.write(line);
-                        ms = Math.pow(Math.random(), 2) * 25;
-                        return [4 /*yield*/, Object(_core_util__WEBPACK_IMPORTED_MODULE_4__["sleeper"])(ms)];
-                    case 3:
-                        _b.sent();
-                        this.frame.writeLine();
-                        _b.label = 4;
-                    case 4:
-                        _i++;
-                        return [3 /*break*/, 2];
-                    case 5:
-                        this.frame.clear();
-                        return [2 /*return*/];
-                }
-            });
-        });
-    };
-    BootProgram = __decorate([
-        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
-        __metadata("design:paramtypes", [_core_file_system_service__WEBPACK_IMPORTED_MODULE_2__["FileSystemService"]])
-    ], BootProgram);
-    return BootProgram;
-}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
-
-
-
-/***/ }),
-
 /***/ "./src/terminal/programs/clear.program.ts":
 /*!************************************************!*\
   !*** ./src/terminal/programs/clear.program.ts ***!
@@ -1392,9 +1062,12 @@ var ClearProgram = /** @class */ (function (_super) {
     }
     ClearProgram.prototype.main = function () {
         return __awaiter(this, void 0, void 0, function () {
+            var frame;
             return __generator(this, function (_a) {
-                if (this.frame.parent)
-                    this.frame.parent.clear();
+                frame = this.frame;
+                while (frame.parent)
+                    frame = frame.parent;
+                frame.children.forEach(function (x) { return x.clear(); });
                 return [2 /*return*/];
             });
         });
@@ -1698,7 +1371,9 @@ var LoginProgram = /** @class */ (function (_super) {
                 switch (_a.label) {
                     case 0:
                         if (args == null || args.length < 2) {
-                            this.frame.writeLine('Welcome to frata.io. Before we start, please identify yourself.');
+                            this.frame.writeLine("Welcome to frata.io. This is a terminal emulator built for no reason.");
+                            this.frame.writeLine();
+                            this.frame.writeLine('Before we start, please identify yourself.');
                         }
                         return [4 /*yield*/, this.loop(args)];
                     case 1:
@@ -1840,6 +1515,374 @@ var ProgramBase = /** @class */ (function () {
     };
     return ProgramBase;
 }());
+
+
+
+/***/ }),
+
+/***/ "./src/terminal/programs/restart.program.ts":
+/*!**************************************************!*\
+  !*** ./src/terminal/programs/restart.program.ts ***!
+  \**************************************************/
+/*! exports provided: BootProgram */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "BootProgram", function() { return BootProgram; });
+/* harmony import */ var _angular_core__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @angular/core */ "./node_modules/@angular/core/fesm5/core.js");
+/* harmony import */ var _program__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./program */ "./src/terminal/programs/program.ts");
+/* harmony import */ var _core_glitch_component__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../core/glitch.component */ "./src/terminal/core/glitch.component.ts");
+/* harmony import */ var _core_util__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../core/util */ "./src/terminal/core/util.ts");
+/* harmony import */ var _clear_program__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./clear.program */ "./src/terminal/programs/clear.program.ts");
+/* harmony import */ var _login_program__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./login.program */ "./src/terminal/programs/login.program.ts");
+/* harmony import */ var _core_login_service__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../core/login.service */ "./src/terminal/core/login.service.ts");
+var __extends = (undefined && undefined.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+var __decorate = (undefined && undefined.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (undefined && undefined.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+var __awaiter = (undefined && undefined.__awaiter) || function (thisArg, _arguments, P, generator) {
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : new P(function (resolve) { resolve(result.value); }).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
+var __generator = (undefined && undefined.__generator) || function (thisArg, body) {
+    var _ = { label: 0, sent: function() { if (t[0] & 1) throw t[1]; return t[1]; }, trys: [], ops: [] }, f, y, t, g;
+    return g = { next: verb(0), "throw": verb(1), "return": verb(2) }, typeof Symbol === "function" && (g[Symbol.iterator] = function() { return this; }), g;
+    function verb(n) { return function (v) { return step([n, v]); }; }
+    function step(op) {
+        if (f) throw new TypeError("Generator is already executing.");
+        while (_) try {
+            if (f = 1, y && (t = y[op[0] & 2 ? "return" : op[0] ? "throw" : "next"]) && !(t = t.call(y, op[1])).done) return t;
+            if (y = 0, t) op = [0, t.value];
+            switch (op[0]) {
+                case 0: case 1: t = op; break;
+                case 4: _.label++; return { value: op[1], done: false };
+                case 5: _.label++; y = op[1]; op = [0]; continue;
+                case 7: op = _.ops.pop(); _.trys.pop(); continue;
+                default:
+                    if (!(t = _.trys, t = t.length > 0 && t[t.length - 1]) && (op[0] === 6 || op[0] === 2)) { _ = 0; continue; }
+                    if (op[0] === 3 && (!t || (op[1] > t[0] && op[1] < t[3]))) { _.label = op[1]; break; }
+                    if (op[0] === 6 && _.label < t[1]) { _.label = t[1]; t = op; break; }
+                    if (t && _.label < t[2]) { _.label = t[2]; _.ops.push(op); break; }
+                    if (t[2]) _.ops.pop();
+                    _.trys.pop(); continue;
+            }
+            op = body.call(thisArg, _);
+        } catch (e) { op = [6, e]; y = 0; } finally { f = t = 0; }
+        if (op[0] & 5) throw op[1]; return { value: op[0] ? op[1] : void 0, done: true };
+    }
+};
+
+
+
+
+
+
+
+var BootProgram = /** @class */ (function (_super) {
+    __extends(BootProgram, _super);
+    function BootProgram(loginService) {
+        var _this = _super.call(this) || this;
+        _this.loginService = loginService;
+        _this.log = [
+            "Uncompressing Linux... done, booting the kernel.",
+            "Booting Linux on physical CPU 0x0",
+            "Initializing cgroup subsys cpu",
+            "Initializing cgroup subsys cpuacct",
+            "Linux version 3.18.10+ (dc4@dc4-XPS13-9333) (gcc version 4.8.3 20140303 (prerelease) (crosstool-NG linaro-1.13.1+bzr2650 - Linaro GCC 2014.03)) #775 PREEMPT Thu Apr 2 18:10:12 BST 2015",
+            "CPU: ARMv6-compatible processor [410fb767] revision 7 (ARMv7), cr=00c5387d",
+            "CPU: PIPT / VIPT nonaliasing data cache, VIPT nonaliasing instruction cache",
+            "Machine model: Raspberry Pi Model B",
+            "cma: Reserved 8 MiB at 0x0b800000",
+            "Memory policy: Data cache writeback",
+            "Built 1 zonelists in Zone order, mobility grouping on.  Total pages: 48768",
+            "Kernel command line: dma.dmachans=0x7f35 bcm2708_fb.fbwidth=656 bcm2708_fb.fbheight=416 bcm2708.boardrev=0x2 bcm2708.serial=0xb51cb961 smsc95x.macaddr=B8:27:EB:1C:B9:61 bcm2708_fb.fbswap=1 sdhci-bcm2708.emmc_clock_freq=250000000 vc_mem.mem_base=0xec00000 vc_mem.mem_size=0x10000000  dwc_otg.lpm_enabe=0 console=ttyAMA0,115200 console=tty1 root=/dev/mmcblk0p2 rootfstype=ext4 elevator=deadline rootwait",
+            "PID hash table entries: 1024 (order: 0, 4096 bytes)",
+            "Dentry cache hash table entries: 32768 (order: 5, 131072 bytes)",
+            "Inode-cache hash table entries: 16384 (order: 4, 65536 bytes)",
+            "Memory: 177372K/196608K available (5885K kernel code, 348K rwdata, 1868K rodata, 340K init, 733K bss, 19236K reserved)",
+            "Virtual kernel memory layout:",
+            "    vector  : 0xffff0000 - 0xffff1000   (   4 kB)",
+            "    fixmap  : 0xffc00000 - 0xffe00000   (2048 kB)",
+            "    vmalloc : 0xcc800000 - 0xff000000   ( 808 MB)",
+            "    lowmem  : 0xc0000000 - 0xcc000000   ( 192 MB)",
+            "    modules : 0xbf000000 - 0xc0000000   (  16 MB)",
+            "        .text : 0xc0008000 - 0xc079a78c   (7754 kB)",
+            "        .init : 0xc079b000 - 0xc07f0000   ( 340 kB)",
+            "        .data : 0xc07f0000 - 0xc084711c   ( 349 kB)",
+            "        .bss : 0xc084711c - 0xc08fe848   ( 734 kB)",
+            "SLUB: HWalign=32, Order=0-3, MinObjects=0, CPUs=1, Nodes=1",
+            "Preemptible hierarchical RCU implementation.",
+            "NR_IRQS:522",
+            "sched_clock: 32 bits at 1000kHz, resolution 1000ns, wraps every 2147483648000ns",
+            "Switching to timer-based delay loop, resolution 1000ns",
+            "Console: colour dummy device 80x30",
+            "console [tty1] enabled",
+            "Calibrating delay loop (skipped), value calculated using timer frequency.. 2.00 BogoMIPS (lpj=10000)",
+            "pid_max: default: 32768 minimum: 301",
+            "Mount-cache hash table entries: 1024 (order: 0, 4096 bytes)",
+            "Mountpoint-cache hash table entries: 1024 (order: 0, 4096 bytes)",
+            "Initializing cgroup subsys memory",
+            "Initializing cgroup subsys devices",
+            "Initializing cgroup subsys freezer",
+            "Initializing cgroup subsys net_cls",
+            "Initializing cgroup subsys blkio",
+            "CPU: Testing write buffer coherency: ok",
+            "ftrace: allocating 19229 entries in 57 pages",
+            "Setting up static identity map for 0x553698 - 0x5536d0",
+            "devtmpfs: initialized",
+            "VFP support v0.3: implementor 41 architecture 1 part 20 variant b rev 5",
+            "pinctrl core: initialized pinctrl subsystem",
+            "NET: Registered protocol family 16",
+            "DMA: preallocated 4096 KiB pool for atomic coherent allocations",
+            "bcm2708.uart_clock = 3000000",
+            "No ATAGs?",
+            "hw-breakpoint: found 6 breakpoint and 1 watchpoint registers.",
+            "hw-breakpoint: maximum watchpoint size is 4 bytes.",
+            "mailbox: Broadcom VideoCore Mailbox driver",
+            "bcm2708_vcio: mailbox at f200b880",
+            "bcm_power: Broadcom power driver",
+            "bcm_power_open() -> 0",
+            "bcm_power_request(0, 8)",
+            "bcm_mailbox_read -> 00000080, 0",
+            "bcm_power_request -> 0",
+            "Serial: AMBA PL011 UART driver",
+            "dev:f1: ttyAMA0 at MMIO 0x20201000 (irq = 83, base_baud = 0) is a PL011 rev3",
+            "console [ttyAMA0] enabled",
+            "SCSI subsystem initialized",
+            "usbcore: registered new interface driver usbfs",
+            "usbcore: registered new interface driver hub",
+            "usbcore: registered new device driver usb",
+            "Switched to clocksource stc",
+            "FS-Cache: Loaded",
+            "CacheFiles: Loaded",
+            "NET: Registered protocol family 2",
+            "TCP established hash table entries: 2048 (order: 1, 8192 bytes)",
+            "TCP bind hash table entries: 2048 (order: 1, 8192 bytes)",
+            "TCP: Hash tables configured (established 2048 bind 2048)",
+            "TCP: reno registered",
+            "UDP hash table entries: 256 (order: 0, 4096 bytes)",
+            "UDP-Lite hash table entries: 256 (order: 0, 4096 bytes)",
+            "NET: Registered protocol family 1",
+            "RPC: Registered named UNIX socket transport module.",
+            "RPC: Registered udp transport module.",
+            "RPC: Registered tcp transport module.",
+            "RPC: Registered tcp NFSv4.1 backchannel transport module.",
+            "bcm2708_dma: DMA manager at f2007000",
+            "vc-mem: phys_addr:0x00000000 mem_base=0x0ec00000 mem_size:0x10000000(256 MiB)",
+            "futex hash table entries: 256 (order: -1, 3072 bytes)",
+            "audit: initializing netlink subsys (disabled)",
+            "audit: type=2000 audit(1.030:1): initialized",
+            "VFS: Disk quotas dquot_6.5.2",
+            "Dquot-cache hash table entries: 1024 (order 0, 4096 bytes)",
+            "FS-Cache: Netfs 'nfs' registered for caching",
+            "NFS: Registering the id_resolver key type",
+            "Key type id_resolver registered",
+            "Key type id_legacy registered",
+            "msgmni has been set to 362",
+            "Block layer SCSI generic (bsg) driver version 0.4 loaded (major 252)",
+            "io scheduler noop registered",
+            "io scheduler deadline registered (default)",
+            "io scheduler cfq registered",
+            "BCM2708FB: allocated DMA memory 4bc00000",
+            "BCM2708FB: allocated DMA channel 0 @ f2007000",
+            "Console: switching to colour frame buffer device 82x26",
+            "bcm2708-dmaengine bcm2708-dmaengine: Load BCM2835 DMA engine driver",
+            "uart-pl011 dev:f1: no DMA platform data",
+            "vc-cma: Videocore CMA driver",
+            "vc-cma: vc_cma_base      = 0x00000000",
+            "vc-cma: vc_cma_size      = 0x00000000 (0 MiB)",
+            "vc-cma: vc_cma_initial   = 0x00000000 (0 MiB)",
+            "brd: module loaded",
+            "loop: module loaded",
+            "vchiq: vchiq_init_state: slot_zero = 0xcb800000, is_master = 0",
+            "Loading iSCSI transport class v2.0-870.",
+            "usbcore: registered new interface driver smsc95xx",
+            "dwc_otg: version 3.00a 10-AUG-2012 (platform bus)",
+            "Core Release: 2.80a",
+            "Setting default values for core params",
+            "Finished setting default values for core params",
+            "Using Buffer DMA mode",
+            "Periodic Transfer Interrupt Enhancement - disabled",
+            "Multiprocessor Interrupt Enhancement - disabled",
+            "OTG VER PARAM: 0, OTG VER FLAG: 0",
+            "Dedicated Tx FIFOs mode",
+            "WARN::dwc_otg_hcd_init:1047: FIQ DMA bounce buffers: virt = 0xcbc14000 dma = 0x4bc14000 len=9024",
+            "FIQ FSM acceleration enabled for :",
+            "Non-periodic Split Transactions",
+            "Periodic Split Transactions",
+            "High-Speed Isochronous Endpoints",
+            "WARN::hcd_init_fiq:412: FIQ on core 0 at 0xc03fad8c",
+            "WARN::hcd_init_fiq:413: FIQ ASM at 0xc03fb064 length 36",
+            "WARN::hcd_init_fiq:438: MPHI regs_base at 0xcc806000",
+            "dwc_otg bcm2708_usb: DWC OTG Controller",
+            "dwc_otg bcm2708_usb: new USB bus registered, assigned bus number 1",
+            "dwc_otg bcm2708_usb: irq 32, io mem 0x00000000",
+            "Init: Port Power? op_state=1",
+            "Init: Power Port (0)",
+            "usb usb1: New USB device found, idVendor=1d6b, idProduct=0002",
+            "usb usb1: New USB device strings: Mfr=3, Product=2, SerialNumber=1",
+            "usb usb1: Product: DWC OTG Controller",
+            "usb usb1: Manufacturer: Linux 3.18.10+ dwc_otg_hcd",
+            "usb usb1: SerialNumber: bcm2708_usb",
+            "hub 1-0:1.0: USB hub found",
+            "hub 1-0:1.0: 1 port detected",
+            "usbcore: registered new interface driver usb-storage",
+            "mousedev: PS/2 mouse device common for all mice",
+            "bcm2835-cpufreq: min=700000 max=700000",
+            "sdhci: Secure Digital Host Controller Interface driver",
+            "sdhci: Copyright(c) Pierre Ossman",
+            "DMA channels allocated for the MMC driver",
+            "Load BCM2835 MMC driver",
+            "sdhci-pltfm: SDHCI platform and OF driver helper",
+            "ledtrig-cpu: registered to indicate activity on CPUs",
+            "hidraw: raw HID events driver (C) Jiri Kosina",
+            "usbcore: registered new interface driver usbhid",
+            "usbhid: USB HID core driver",
+            "TCP: cubic registered",
+            "Initializing XFRM netlink socket",
+            "NET: Registered protocol family 17",
+            "Key type dns_resolver registered",
+            "registered taskstats version 1",
+            "vc-sm: Videocore shared memory driver",
+            "[vc_sm_connected_init]: start",
+            "[vc_sm_connected_init]: end - returning 0",
+            "Waiting for root device /dev/mmcblk0p2...",
+            "Indeed it is in host mode hprt0 = 00021501",
+            "mmc0: host does not support reading read-only switch, assuming write-enable",
+            "mmc0: new high speed SDHC card at address b368",
+            "mmcblk0: mmc0:b368 SMI   15.0 GiB",
+            "    mmcblk0: p1 p2",
+            "EXT4-fs (mmcblk0p2): INFO: recovery required on readonly filesystem",
+            "EXT4-fs (mmcblk0p2): write access will be enabled during recovery",
+            "EXT4-fs (mmcblk0p2): recovery complete",
+            "EXT4-fs (mmcblk0p2): mounted filesystem with ordered data mode. Opts: (null)",
+            "usb 1-1: new high-speed USB device number 2 using dwc_otg",
+            "VFS: Mounted root (ext4 filesystem) readonly on device 179:2.",
+            "Indeed it is in host mode hprt0 = 00001101",
+            "devtmpfs: mounted",
+            "Freeing unused kernel memory: 340K (c079b000 - c07f0000)",
+            "usb 1-1: New USB device found, idVendor=0424, idProduct=9512",
+            "usb 1-1: New USB device strings: Mfr=0, Product=0, SerialNumber=0",
+            "hub 1-1:1.0: USB hub found",
+            "hub 1-1:1.0: 3 ports detected",
+            "usb 1-1.1: new high-speed USB device number 3 using dwc_otg",
+            "usb 1-1.1: New USB device found, idVendor=0424, idProduct=ec00",
+            "usb 1-1.1: New USB device strings: Mfr=0, Product=0, SerialNumber=0",
+            "smsc95xx v1.0.4",
+            "smsc95xx 1-1.1:1.0 eth0: register 'smsc95xx' at usb-bcm2708_usb-1.1, smsc95xx USB 2.0 Ethernet, b8:27:eb:1c:b9:61",
+            "udevd[159]: starting version 175",
+            "EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)",
+            "EXT4-fs (mmcblk0p2): re-mounted. Opts: (null)",
+            "random: nonblocking pool is initialized",
+            "Driver for 1-wire Dallas network protocol.",
+            "i2c /dev entries driver",
+        ];
+        return _this;
+    }
+    BootProgram.prototype.run = function (frame, args) {
+        return __awaiter(this, void 0, void 0, function () {
+            var grandParent, _a;
+            return __generator(this, function (_b) {
+                switch (_b.label) {
+                    case 0:
+                        grandParent = frame.parent.parent;
+                        grandParent.children.forEach(function (x) { return x.clear(); });
+                        _a = this;
+                        return [4 /*yield*/, grandParent.children[grandParent.children.length - 1]];
+                    case 1:
+                        _a.frame = _b.sent();
+                        return [4 /*yield*/, this.main(args)];
+                    case 2:
+                        _b.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BootProgram.prototype.main = function (args) {
+        return __awaiter(this, void 0, void 0, function () {
+            return __generator(this, function (_a) {
+                switch (_a.label) {
+                    case 0:
+                        this.frame.enableForceScrolling();
+                        return [4 /*yield*/, this.simulateBoot()];
+                    case 1:
+                        _a.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BootProgram.prototype.simulateBoot = function () {
+        return __awaiter(this, void 0, void 0, function () {
+            var _i, _a, line, ms, _b, _c;
+            return __generator(this, function (_d) {
+                switch (_d.label) {
+                    case 0:
+                        this.frame.append(_core_glitch_component__WEBPACK_IMPORTED_MODULE_2__["GlitchComponent"], function (c) { return c.instance.text = 'frataOS'; });
+                        return [4 /*yield*/, Object(_core_util__WEBPACK_IMPORTED_MODULE_3__["sleeper"])(1000)];
+                    case 1:
+                        _d.sent();
+                        this.frame.clear();
+                        _i = 0, _a = this.log;
+                        _d.label = 2;
+                    case 2:
+                        if (!(_i < _a.length)) return [3 /*break*/, 5];
+                        line = _a[_i];
+                        this.frame.write(line);
+                        ms = Math.pow(Math.random(), 2) * 500;
+                        return [4 /*yield*/, Object(_core_util__WEBPACK_IMPORTED_MODULE_3__["sleeper"])(ms)];
+                    case 3:
+                        _d.sent();
+                        this.frame.writeLine();
+                        _d.label = 4;
+                    case 4:
+                        _i++;
+                        return [3 /*break*/, 2];
+                    case 5: return [4 /*yield*/, (new _clear_program__WEBPACK_IMPORTED_MODULE_4__["ClearProgram"]().run(this.frame, []))];
+                    case 6:
+                        _d.sent();
+                        this.frame.clear();
+                        _c = (_b = new _login_program__WEBPACK_IMPORTED_MODULE_5__["LoginProgram"](this.loginService)).run;
+                        return [4 /*yield*/, this.frame.createFrame()];
+                    case 7: return [4 /*yield*/, (_c.apply(_b, [_d.sent(), []]))];
+                    case 8:
+                        _d.sent();
+                        return [2 /*return*/];
+                }
+            });
+        });
+    };
+    BootProgram = __decorate([
+        Object(_angular_core__WEBPACK_IMPORTED_MODULE_0__["Injectable"])(),
+        Object(_program__WEBPACK_IMPORTED_MODULE_1__["Program"])({
+            alias: 'restart',
+            description: 'Restarts the system.'
+        }),
+        __metadata("design:paramtypes", [_core_login_service__WEBPACK_IMPORTED_MODULE_6__["LoginService"]])
+    ], BootProgram);
+    return BootProgram;
+}(_program__WEBPACK_IMPORTED_MODULE_1__["ProgramBase"]));
 
 
 
@@ -2730,7 +2773,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _core_login_service__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! ./core/login.service */ "./src/terminal/core/login.service.ts");
 /* harmony import */ var _core_file_system_service__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! ./core/file-system.service */ "./src/terminal/core/file-system.service.ts");
 /* harmony import */ var _programs_clear_program__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ./programs/clear.program */ "./src/terminal/programs/clear.program.ts");
-/* harmony import */ var _programs_boot_program__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./programs/boot.program */ "./src/terminal/programs/boot.program.ts");
+/* harmony import */ var _programs_restart_program__WEBPACK_IMPORTED_MODULE_19__ = __webpack_require__(/*! ./programs/restart.program */ "./src/terminal/programs/restart.program.ts");
 /* harmony import */ var _core_glitch_component__WEBPACK_IMPORTED_MODULE_20__ = __webpack_require__(/*! ./core/glitch.component */ "./src/terminal/core/glitch.component.ts");
 /* harmony import */ var _programs_help_program__WEBPACK_IMPORTED_MODULE_21__ = __webpack_require__(/*! ./programs/help.program */ "./src/terminal/programs/help.program.ts");
 /* harmony import */ var _programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_22__ = __webpack_require__(/*! ./programs/tic-tac-toe/tic-tac-toe.program */ "./src/terminal/programs/tic-tac-toe/tic-tac-toe.program.ts");
@@ -2767,7 +2810,7 @@ var __decorate = (undefined && undefined.__decorate) || function (decorators, ta
 
 
 
-var programs = Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_boot_program__WEBPACK_IMPORTED_MODULE_19__["BootProgram"]).concat(Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_clear_program__WEBPACK_IMPORTED_MODULE_18__["ClearProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_hi_program__WEBPACK_IMPORTED_MODULE_12__["HiProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_login_program__WEBPACK_IMPORTED_MODULE_15__["LoginProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_shell_program__WEBPACK_IMPORTED_MODULE_9__["ShellProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_help_program__WEBPACK_IMPORTED_MODULE_21__["HelpProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_22__["TicTacToeProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_whoami_whoami_program__WEBPACK_IMPORTED_MODULE_23__["WhoAmIProgram"]));
+var programs = Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_restart_program__WEBPACK_IMPORTED_MODULE_19__["BootProgram"]).concat(Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_clear_program__WEBPACK_IMPORTED_MODULE_18__["ClearProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_hi_program__WEBPACK_IMPORTED_MODULE_12__["HiProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_login_program__WEBPACK_IMPORTED_MODULE_15__["LoginProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_shell_program__WEBPACK_IMPORTED_MODULE_9__["ShellProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_help_program__WEBPACK_IMPORTED_MODULE_21__["HelpProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_tic_tac_toe_tic_tac_toe_program__WEBPACK_IMPORTED_MODULE_22__["TicTacToeProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_whoami_whoami_program__WEBPACK_IMPORTED_MODULE_23__["WhoAmIProgram"]), Object(_programs_program__WEBPACK_IMPORTED_MODULE_13__["makeProgramProvider"])(_programs_restart_program__WEBPACK_IMPORTED_MODULE_19__["BootProgram"]));
 var entryComponents = [
     _core_caret_component__WEBPACK_IMPORTED_MODULE_7__["CaretComponent"],
     _core_text_component__WEBPACK_IMPORTED_MODULE_6__["TextComponent"],
