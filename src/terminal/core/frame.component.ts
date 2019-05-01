@@ -22,6 +22,7 @@ export class FrameComponent implements AfterViewInit {
 
     @ViewChild(FrameContentDirective) content: FrameContentDirective;
     parent: FrameComponent;
+    children: FrameComponent[] = [];
 
     constructor(
         private componentFactoryResolver: ComponentFactoryResolver) {
@@ -74,6 +75,7 @@ export class FrameComponent implements AfterViewInit {
 
     clear() {
         this.content.viewContainerRef.clear();
+        this.children = [];
         this.index = 0;
     }
 
@@ -84,6 +86,7 @@ export class FrameComponent implements AfterViewInit {
             c.instance.parent = this;
             instance = c.instance;
         });
+        this.children.push(instance);
         return instance;
     }
 

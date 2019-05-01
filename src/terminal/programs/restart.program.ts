@@ -1,10 +1,17 @@
 import { Injectable } from "@angular/core";
-import { ProgramBase } from "./program";
-import { FileSystemService } from "../core/file-system.service";
+import { ProgramBase, Program } from "./program";
 import { GlitchComponent } from "../core/glitch.component";
 import { sleeper } from '../core/util';
+import { ClearProgram } from "./clear.program";
+import { FrameComponent } from "../core/frame.component";
+import { LoginProgram } from "./login.program";
+import { LoginService } from "../core/login.service";
 
 @Injectable()
+@Program({
+    alias: 'restart',
+    description: 'Restarts the system.'
+})
 export class BootProgram extends ProgramBase {
     log = [
         `Uncompressing Linux... done, booting the kernel.`,
@@ -202,8 +209,17 @@ export class BootProgram extends ProgramBase {
     ];
 
 
-    constructor(private fs: FileSystemService) {
+    constructor(private loginService: LoginService) {
         super();
+    }
+
+    async run(frame: FrameComponent, args: string[]) {
+        const grandParent = frame.parent.parent;
+        grandParent.children.forEach(x => x.clear());
+
+        this.frame = await grandParent.children[grandParent.children.length - 1];
+
+        await this.main(args);
     }
 
     async main(args: string[]) {
@@ -212,17 +228,20 @@ export class BootProgram extends ProgramBase {
     }
 
     async simulateBoot() {
+
         this.frame.append(GlitchComponent, c => c.instance.text = 'frataOS');
         await sleeper(1000);
         this.frame.clear();
 
         for (const line of this.log) {
             this.frame.write(line);
-            const ms = Math.pow(Math.random(), 2) * 25;
+            const ms = Math.pow(Math.random(), 2) * 500;
             await sleeper(ms);
             this.frame.writeLine();
         }
 
+        await (new ClearProgram().run(this.frame, []));
         this.frame.clear();
+        await (new LoginProgram(this.loginService).run(await this.frame.createFrame(), []));
     }
 }

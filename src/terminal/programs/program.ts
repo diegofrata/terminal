@@ -1,11 +1,11 @@
 import { FrameComponent } from "../core/frame.component";
 import { Type } from "@angular/core";
 
-export let PROGRAMS: { [alias: string]: { target: string, description: string } } = {};
+export let PROGRAMS: { [alias: string]: { target: string, description: string, hide?: boolean } } = {};
 
-export function Program<T>(definition: { alias: string, description: string }): any {
+export function Program<T>(definition: { alias: string, description: string, hide?: boolean }): any {
     return function (target) {
-        PROGRAMS[definition.alias] = { target: target.name, description: definition.description };
+        PROGRAMS[definition.alias] = { target: target.name, description: definition.description , hide: definition.hide };
     }
 }
 

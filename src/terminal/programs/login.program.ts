@@ -6,7 +6,8 @@ import { Color } from "../core/color";
 @Injectable()
 @Program({
     alias: 'login',
-    description: 'Allow a user to login with a username and password.'
+    description: 'Allow a user to login with a username and password.',
+    hide: true
 })
 export class LoginProgram extends ProgramBase {
 
@@ -16,7 +17,9 @@ export class LoginProgram extends ProgramBase {
 
     async main(args: string[]) {
         if (args == null || args.length < 2) {
-            this.frame.writeLine('Welcome to frata.io. Before we start, please identify yourself.');
+            this.frame.writeLine(`Welcome to frata.io. This is a terminal emulator built for no reason.`);
+            this.frame.writeLine();
+            this.frame.writeLine('Before we start, please identify yourself.');            
         }
 
         await this.loop(args);

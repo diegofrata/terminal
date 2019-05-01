@@ -6,7 +6,8 @@ import { FileSystemService } from "../core/file-system.service";
 @Injectable()
 @Program({
     alias: 'shell',
-    description: 'Starts a new shell that can take commands.'
+    description: 'Starts a new shell that can take commands.',
+    hide: true
 })
 export class ShellProgram extends ProgramBase {
     host = 'terminal';

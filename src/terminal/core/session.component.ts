@@ -1,10 +1,17 @@
 import { Component, Injector } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, NavigationEnd, ActivationEnd } from '@angular/router';
-import { BootProgram } from '../programs/boot.program';
+import { BootProgram } from '../programs/restart.program';
 import { LoginProgram } from '../programs/login.program';
 import { ShellProgram } from '../programs/shell.program';
 import { TerminalComponent } from './terminal.component';
 import { first, filter } from 'rxjs/operators';
+
+function initGA() {
+    let w: any = window;
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push('js', new Date());
+    w.dataLayer.push('config', 'UA-139433840-1');
+}
 
 @Component({
     selector: 'terminal-session',
@@ -15,6 +22,8 @@ export class SessionComponent {
     params: ParamMap;
 
     constructor(private injector: Injector, router: Router) {
+        initGA();
+
         router.events.pipe(filter(x => x instanceof ActivationEnd), first()).subscribe(async (x: ActivationEnd) => {
             this.params = x.snapshot.paramMap;
 

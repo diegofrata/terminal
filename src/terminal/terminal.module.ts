@@ -20,7 +20,7 @@ import { MakeDirectoryProgram } from './programs/make-directory.program';
 import { ListDirectoryProgram } from './programs/list-directory.program';
 import { ChangeDirectoryProgram } from './programs/change-directory.program';
 import { ClearProgram } from './programs/clear.program';
-import { BootProgram } from './programs/boot.program';
+import { BootProgram } from './programs/restart.program';
 import { GlitchComponent } from './core/glitch.component';
 import { CountProgram } from './programs/count.program';
 import { HelpProgram } from './programs/help.program';
@@ -41,6 +41,7 @@ const programs = [
   ...makeProgramProvider(HelpProgram),
   ...makeProgramProvider(TicTacToeProgram),
   ...makeProgramProvider(WhoAmIProgram),
+  ...makeProgramProvider(BootProgram),
 ]
 
 const entryComponents = [

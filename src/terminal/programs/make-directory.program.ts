@@ -6,7 +6,7 @@ import { Color } from "../core/color";
 @Injectable()
 @Program({
     alias: 'mkdir',
-    description: 'Creates a new directory.'
+    description: 'Creates a new directory.',
 })
 export class MakeDirectoryProgram extends ProgramBase {
 

@@ -5,7 +5,7 @@ import { ImgComponent } from "src/terminal/core/img.component";
 @Injectable()
 @Program({
     alias: 'whoami',
-    description: 'Tells you more about the Creator.'
+    description: 'Mirror mirror on the wall...'
 })
 export class WhoAmIProgram extends ProgramBase {
 
@@ -19,7 +19,7 @@ export class WhoAmIProgram extends ProgramBase {
                 ref.instance.style = {
                     'width': '100%',
                     'max-width': '100%',
-                    'height': 'calc(100vh - 48px)',
+                    'max-height': 'calc(100vh - 48px)',
                 }
                 await ref.instance.loaded.toPromise();
                 loadingFrame.clear();

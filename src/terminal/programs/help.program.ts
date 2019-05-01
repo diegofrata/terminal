@@ -1,11 +1,13 @@
 import { Injectable } from "@angular/core";
 import { ProgramBase, Program, PROGRAMS } from "./program";
 import { max, padEnd } from "lodash";
+import { Color } from "../core/color";
 
 @Injectable()
 @Program({
     alias: 'help', 
-    description: 'Displays a list of all supported commands.'
+    description: 'Displays a list of all supported commands.',
+    hide: true
 })
 export class HelpProgram extends ProgramBase {
 
@@ -16,8 +18,9 @@ export class HelpProgram extends ProgramBase {
         const keys = Object.keys(PROGRAMS).sort();
         const maxLength = max(keys.map(x => x.length));
 
-        keys.forEach(element => {
-            this.frame.writeLine(`${padEnd(element, maxLength, ' ')} | ${PROGRAMS[element].description}`);
+        keys.filter(x => PROGRAMS[x].hide != true).forEach(element => {
+            this.frame.write(`${element}`, Color.BrightGreen);
+            this.frame.writeLine(`: ${PROGRAMS[element].description}`);
         });
         this.frame.writeLine();
     }
