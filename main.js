@@ -807,10 +807,17 @@ var __generator = (undefined && undefined.__generator) || function (thisArg, bod
 
 
 
+function initGA() {
+    var w = window;
+    w.dataLayer = w.dataLayer || [];
+    w.dataLayer.push('js', new Date());
+    w.dataLayer.push('config', 'UA-139433840-1');
+}
 var SessionComponent = /** @class */ (function () {
     function SessionComponent(injector, router) {
         var _this = this;
         this.injector = injector;
+        initGA();
         router.events.pipe(Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["filter"])(function (x) { return x instanceof _angular_router__WEBPACK_IMPORTED_MODULE_1__["ActivationEnd"]; }), Object(rxjs_operators__WEBPACK_IMPORTED_MODULE_4__["first"])()).subscribe(function (x) { return __awaiter(_this, void 0, void 0, function () {
             var login, shell, _a, _b, _c, _d, _e, _f, _g, _h;
             return __generator(this, function (_j) {
